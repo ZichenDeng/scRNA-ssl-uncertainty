@@ -1,0 +1,9 @@
+.conda-env/
+.venv/
+__pycache__/
+*.pyc
+
+data/raw/
+data/processed/*.h5ad
+
+notebooks/.ipynb_checkpoints/

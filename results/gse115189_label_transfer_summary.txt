@@ -1,0 +1,15 @@
+n_cells: 3364
+agreement_rate: 0.9557074910820452
+mean_confidence_batch1: 0.9537937034491759
+mean_confidence_batch2: 0.9456110596665246
+mean_confidence_consensus: 0.94970238155785
+
+Consensus label counts:
+CD4 T cells: 1622
+CD14+ Monocytes: 434
+B cells: 428
+CD8 T cells: 402
+NK cells: 395
+Megakaryocytes: 36
+FCGR3A+ Monocytes: 31
+Dendritic cells: 16

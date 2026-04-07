@@ -1,0 +1,48 @@
+Shared labels:
+- B cells
+- CD14+ Monocytes
+- CD4 T cells
+- CD8 T cells
+- Dendritic cells
+- FCGR3A+ Monocytes
+- Megakaryocytes
+- NK cells
+
+## batch1_to_batch2
+n_train=11432 n_test=24250 n_genes=11940
+accuracy=0.9190 macro_f1=0.8234 weighted_f1=0.9174
+
+                   precision    recall  f1-score   support
+
+          B cells     0.9320    0.9890    0.9596      2537
+  CD14+ Monocytes     0.8907    0.9924    0.9388      5287
+      CD4 T cells     0.9798    0.9581    0.9689     10245
+      CD8 T cells     0.7408    0.8581    0.7951      2022
+  Dendritic cells     0.9163    0.5386    0.6785       427
+FCGR3A+ Monocytes     0.9534    0.6535    0.7755      1567
+   Megakaryocytes     0.5465    0.6946    0.6117       203
+         NK cells     0.9182    0.8068    0.8589      1962
+
+         accuracy                         0.9190     24250
+        macro avg     0.8597    0.8114    0.8234     24250
+     weighted avg     0.9240    0.9190    0.9174     24250
+
+## batch2_to_batch1
+n_train=24250 n_test=11432 n_genes=11940
+accuracy=0.9173 macro_f1=0.8752 weighted_f1=0.9131
+
+                   precision    recall  f1-score   support
+
+          B cells     0.9923    0.9634    0.9776      1203
+  CD14+ Monocytes     0.9732    0.9223    0.9471      1814
+      CD4 T cells     0.9049    0.9980    0.9492      4949
+      CD8 T cells     0.8628    0.5963    0.7052      1350
+  Dendritic cells     0.9720    0.7394    0.8399       188
+FCGR3A+ Monocytes     0.8006    0.9599    0.8730       573
+   Megakaryocytes     0.7119    0.8936    0.7925        47
+         NK cells     0.9328    0.9021    0.9172      1308
+
+         accuracy                         0.9173     11432
+        macro avg     0.8938    0.8719    0.8752     11432
+     weighted avg     0.9182    0.9173    0.9131     11432
+

@@ -1,0 +1,19 @@
+name: scrna-ssl-uncertainty
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - anndata
+  - scanpy
+  - umap-learn
+  - pytorch
+  - cpuonly
+  - tqdm
