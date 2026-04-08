@@ -6,6 +6,7 @@ from pathlib import Path
 import anndata as ad
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.patches import FancyBboxPatch
 import pandas as pd
 
 ROOT = Path('/home/zichende/scRNA-ssl-uncertainty')
@@ -20,6 +21,13 @@ B2 = DATA_PROC / 'GSE96583_batch2_qc_shared_annotated_singlets.h5ad'
 SLIDE_TITLE = 'MS2 Sections 1-2: Dataset Motivation and Data Wrangling'
 PROJECT_NUMBER = 'Canvas Project #: TODO'
 GROUP_MEMBERS = 'Group Members: TODO'
+
+BG = '#F6F4EF'
+NAVY = '#16324F'
+TEAL = '#2A7F8E'
+GOLD = '#C58B2B'
+INK = '#1F2933'
+MUTED = '#5B6770'
 
 
 def ensure_dirs() -> None:
@@ -148,7 +156,7 @@ def code_cell(code: str) -> dict:
 def build_notebook(files_df: pd.DataFrame, samples_df: pd.DataFrame, labels_df: pd.DataFrame) -> None:
     notebook = {
         'cells': [
-            md_cell(f'''\\
+            md_cell(f'''\
 # {SLIDE_TITLE}
 {PROJECT_NUMBER}
 
@@ -159,13 +167,13 @@ This notebook supports presentation sections 1 and 2 only:
 1. Introduction, motivation, and why `GSE96583` is a defensible dataset choice.
 2. Data access, raw structure, wrangling, and preprocessing decisions.
             '''),
-            md_cell('''\\
+            md_cell('''\
 ## Data Description
 `GSE96583` is a PBMC single-cell RNA-seq dataset from GEO with directly downloadable raw count matrices and cell-level metadata. It is a strong MS2 dataset because it already contains usable cell-type annotations, clear batch structure (`batch1` vs `batch2`), and a condition shift inside `batch2` (`ctrl` vs `stim`).
 
 This makes it suitable for studying distribution shift without introducing a second dataset whose labels or accessibility are uncertain.
             '''),
-            code_cell('''\\
+            code_cell('''\
 from pathlib import Path
 import pandas as pd
 
@@ -176,7 +184,7 @@ for path in sorted(raw_dir.glob('*')):
         files.append({'file': path.name, 'size_mb': round(path.stat().st_size / (1024 * 1024), 2)})
 pd.DataFrame(files)
             '''),
-            md_cell('''\\
+            md_cell('''\
 ## Understanding the Raw Data Structure
 The raw data are not a single clean table. Instead, the dataset is split across multiple compressed files:
 - count matrices for different biological or technical subsets
@@ -185,7 +193,7 @@ The raw data are not a single clean table. Instead, the dataset is split across 
 
 That raw structure is one reason wrangling matters here. Before we can model anything, we have to unify matrices, reconcile gene spaces, attach metadata, and decide what cells to keep.
             '''),
-            code_cell('''\\
+            code_cell('''\
 import anndata as ad
 
 adata_b1 = ad.read_h5ad('/home/zichende/scRNA-ssl-uncertainty/data/processed/GSE96583_batch1_qc_shared_annotated_singlets.h5ad')
@@ -196,7 +204,7 @@ print('batch2 shape:', adata_b2.shape)
 print('batch1 samples:', adata_b1.obs['sample'].value_counts().to_dict())
 print('batch2 samples:', adata_b2.obs['sample'].value_counts().to_dict())
             '''),
-            md_cell('''\\
+            md_cell('''\
 ## Wrangling and Preprocessing Decisions
 The current processed benchmark reflects these choices:
 - load and standardize the raw matrices from GEO
@@ -207,7 +215,7 @@ The current processed benchmark reflects these choices:
 
 These are not cosmetic steps. They directly determine whether cross-batch evaluation is meaningful.
             '''),
-            code_cell('''\\
+            code_cell('''\
 label_col_b1 = 'cell.type' if 'cell.type' in adata_b1.obs.columns else 'cell'
 label_col_b2 = 'cell.type' if 'cell.type' in adata_b2.obs.columns else 'cell'
 
@@ -217,14 +225,14 @@ label_counts = pd.DataFrame({
 }).fillna(0).astype(int)
 label_counts
             '''),
-            md_cell('''\\
+            md_cell('''\
 ## Meaningful Insights from Sections 1 and 2
 - `GSE96583` is accessible, labeled, and already contains both batch shift and condition shift, so it is enough for a clean milestone dataset.
 - The dataset is class-imbalanced: broad immune populations dominate while dendritic cells and megakaryocytes are rare.
 - The raw file layout is fragmented, so wrangling is necessary before any valid analysis.
 - Singlet filtering is important because downstream classification assumes one biological cell state per observation.
             '''),
-            md_cell('''\\
+            md_cell('''\
 ## Revised Research Question
 Given a well-wrangled and annotated `GSE96583` PBMC benchmark, can self-supervised representations improve cell-type prediction robustness under batch and condition shift, and can uncertainty estimates help identify unreliable predictions?
             '''),
@@ -271,16 +279,46 @@ def wrap_lines(text: str, width: int = 80) -> str:
     return '\n'.join(lines)
 
 
-def slide(ax, title: str, bullets: list[str], footer: str | None = None) -> None:
+def new_slide():
+    fig = plt.figure(figsize=(13.33, 7.5), facecolor=BG)
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
     ax.axis('off')
-    ax.text(0.03, 0.93, title, fontsize=24, fontweight='bold', va='top')
-    y = 0.82
+    ax.add_patch(FancyBboxPatch((0.035, 0.87), 0.16, 0.05, boxstyle='round,pad=0.01,rounding_size=0.01',
+                                facecolor=NAVY, edgecolor='none'))
+    return fig, ax
+
+
+def add_header(ax, section: str, title: str, subtitle: str | None = None) -> None:
+    ax.text(0.05, 0.895, section.upper(), color='white', fontsize=11, fontweight='bold', va='center')
+    ax.text(0.05, 0.82, title, color=NAVY, fontsize=26, fontweight='bold', va='top')
+    if subtitle:
+        ax.text(0.05, 0.775, subtitle, color=MUTED, fontsize=12.5, va='top')
+
+
+def add_bullets(ax, bullets: list[str], x: float, y: float, width: int = 48, line_gap: float = 0.088) -> None:
+    cursor = y
     for bullet in bullets:
-        wrapped = wrap_lines(bullet, 76)
-        ax.text(0.05, y, f'• {wrapped}', fontsize=15, va='top')
-        y -= 0.12 + 0.02 * wrapped.count('\n')
-    if footer:
-        ax.text(0.03, 0.05, footer, fontsize=10, color='dimgray')
+        wrapped = wrap_lines(bullet, width)
+        ax.text(x, cursor, f'• {wrapped}', fontsize=15, color=INK, va='top')
+        cursor -= line_gap + 0.02 * wrapped.count('\n')
+
+
+def add_card(ax, xy: tuple[float, float], wh: tuple[float, float], title: str, body: str, color: str) -> None:
+    x, y = xy
+    w, h = wh
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle='round,pad=0.012,rounding_size=0.02',
+                                facecolor='white', edgecolor='none'))
+    ax.add_patch(FancyBboxPatch((x, y + h - 0.02), w, 0.02, boxstyle='round,pad=0.012,rounding_size=0.02',
+                                facecolor=color, edgecolor='none'))
+    ax.text(x + 0.02, y + h - 0.05, title, fontsize=14.5, fontweight='bold', color=NAVY, va='top')
+    ax.text(x + 0.02, y + h - 0.10, wrap_lines(body, 28), fontsize=12.2, color=INK, va='top')
+
+
+def add_footer(ax, text: str, page: int) -> None:
+    ax.text(0.05, 0.035, text, fontsize=10.5, color=MUTED, va='center')
+    ax.text(0.95, 0.035, str(page), fontsize=10.5, color=MUTED, va='center', ha='right')
 
 
 def build_slides(files_df: pd.DataFrame, samples_df: pd.DataFrame, labels_df: pd.DataFrame) -> None:
@@ -291,45 +329,94 @@ def build_slides(files_df: pd.DataFrame, samples_df: pd.DataFrame, labels_df: pd
     rare = labels_df.assign(total=labels_df['batch1'] + labels_df['batch2']).sort_values('total').iloc[0]['cell_type']
 
     with PdfPages(pdf_path) as pdf:
-        fig, ax = plt.subplots(figsize=(13.33, 7.5))
-        slide(ax, '1. Why GSE96583?', [
-            'We rescoped the project to one benchmark dataset so that the milestone is about defensible data wrangling, not about uncertain cross-dataset labels.',
-            'GSE96583 is public on GEO, directly downloadable, and already contains usable PBMC cell-type metadata.',
-            'It also contains meaningful shift structure: batch1 versus batch2, plus control versus stimulation inside batch2.',
-            f'This gives us a realistic benchmark without adding label-accessibility risk from a second dataset. Total raw download size is about {total_raw_mb} MB.'
-        ], footer='Section 1: introduction, motivation, and dataset choice')
-        pdf.savefig(fig, bbox_inches='tight')
+        fig, ax = new_slide()
+        add_header(
+            ax,
+            'Section 1',
+            'Why We Chose GSE96583',
+            'A single well-labeled PBMC benchmark is stronger for MS2 than a broader but poorly grounded multi-dataset scope.',
+        )
+        add_bullets(ax, [
+            'We rescoped to one dataset so the milestone centers on defensible wrangling rather than uncertain external labels.',
+            'GSE96583 is fully public on GEO, script-downloadable, and already includes usable cell-level PBMC annotations.',
+            'It contains both batch shift (batch1 vs batch2) and condition shift (ctrl vs stim inside batch2).',
+        ], x=0.06, y=0.68, width=52)
+        add_card(ax, (0.64, 0.56), (0.27, 0.16), 'Dataset facts',
+                 f'Raw download size: {total_raw_mb} MB\nProcessed singlets: {batch1_cells + batch2_cells:,} cells', TEAL)
+        add_card(ax, (0.64, 0.34), (0.27, 0.16), 'Why it fits MS2',
+                 'Direct access, real batch structure, and immediate labels make it suitable for EDA and baseline modeling.', GOLD)
+        add_footer(ax, 'Introduction, motivation, and dataset choice', 1)
+        pdf.savefig(fig)
         plt.close(fig)
 
-        fig, ax = plt.subplots(figsize=(13.33, 7.5))
-        slide(ax, '2. Raw Data Structure', [
-            'The GEO download is not a single tidy table. It is fragmented across compressed count matrices, gene files, and metadata tables.',
-            'Batch1 is assembled from three source matrices: GSM2560245_A, GSM2560246_B, and GSM2560247_C.',
-            'Batch2 is assembled from GSM2560248_2.1 and GSM2560249_2.2, which also support control-versus-stimulation comparisons.',
-            'The raw structure itself motivates wrangling: before modeling, we need consistent genes, aligned metadata, and one clean cell-by-gene object per benchmark split.'
-        ], footer='Section 2: data access and raw dataset structure')
-        pdf.savefig(fig, bbox_inches='tight')
+        fig, ax = new_slide()
+        add_header(
+            ax,
+            'Section 2',
+            'The Raw GEO Release Is Fragmented',
+            'The source data arrive as separate matrices, gene files, and metadata tables rather than one clean analysis table.',
+        )
+        add_bullets(ax, [
+            'Batch1 is assembled from GSM2560245_A, GSM2560246_B, and GSM2560247_C.',
+            'Batch2 is assembled from GSM2560248_2.1 and GSM2560249_2.2, which also enable ctrl-versus-stim comparisons.',
+            'This raw layout forces explicit reconciliation of genes, samples, and annotations before modeling.',
+        ], x=0.06, y=0.67, width=45)
+        img = plt.imread(FIG / 'raw_file_sizes.png')
+        ax_img = fig.add_axes([0.56, 0.16, 0.37, 0.58])
+        ax_img.imshow(img)
+        ax_img.axis('off')
+        ax.text(0.56, 0.13, 'Raw file inventory and size profile from the GEO download.', fontsize=10.5, color=MUTED)
+        add_footer(ax, 'Raw file structure and access pattern', 2)
+        pdf.savefig(fig)
         plt.close(fig)
 
-        fig, ax = plt.subplots(figsize=(13.33, 7.5))
-        slide(ax, '3. Wrangling Pipeline', [
-            'Step 1: download GEO count matrices and metadata and inspect file layout.',
-            'Step 2: standardize matrices and attach cell-level annotations.',
-            'Step 3: restrict analyses to shared genes so that cross-batch comparisons are valid.',
-            'Step 4: keep QC-passed singlets only, which removes likely doublets that would distort cell-type classification.',
-            'Step 5: save processed AnnData objects that can be reused by EDA, baselines, and later SSL models.'
-        ], footer='Section 2: preprocessing decisions and why they matter')
-        pdf.savefig(fig, bbox_inches='tight')
+        fig, ax = new_slide()
+        add_header(
+            ax,
+            'Section 2',
+            'Wrangling Pipeline',
+            'Each preprocessing step protects validity of later cross-batch comparisons.',
+        )
+        steps = [
+            ('1. Download + inspect', 'Pull GEO matrices and metadata, then verify the file layout before loading.'),
+            ('2. Standardize + annotate', 'Load matrices into AnnData and attach per-cell metadata.'),
+            ('3. Align gene space', 'Restrict to shared genes so batch-to-batch comparisons use the same feature set.'),
+            ('4. Keep singlets only', 'Remove likely doublets to avoid mixed-cell labels in classification.'),
+        ]
+        x_positions = [0.06, 0.29, 0.52, 0.75]
+        for (title, body), x in zip(steps, x_positions):
+            add_card(ax, (x, 0.36), (0.17, 0.22), title, body, [NAVY, TEAL, GOLD, '#A23E48'][x_positions.index(x)])
+        img = plt.imread(FIG / 'sample_counts.png')
+        ax_img = fig.add_axes([0.08, 0.10, 0.36, 0.20])
+        ax_img.imshow(img)
+        ax_img.axis('off')
+        ax.text(0.48, 0.18, wrap_lines(
+            'After filtering and harmonization, batch1 contributes 11,432 singlets and batch2 contributes 24,250 singlets.',
+            42
+        ), fontsize=13, color=INK, va='center')
+        add_footer(ax, 'Preprocessing steps and immediate outputs', 3)
+        pdf.savefig(fig)
         plt.close(fig)
 
-        fig, ax = plt.subplots(figsize=(13.33, 7.5))
-        slide(ax, '4. Wrangling Outcomes', [
-            f'After QC and singlet filtering, batch1 contains {batch1_cells} cells and batch2 contains {batch2_cells} cells.',
-            'The processed data preserve major immune cell types needed for downstream classification.',
-            f'The class distribution is imbalanced, with broad T-cell and monocyte populations dominating while {rare} and other rare types are scarce.',
-            'This matters for later modeling because macro-F1 and per-class behavior will be more informative than accuracy alone.'
-        ], footer='Bridge to later sections: EDA and baseline evaluation')
-        pdf.savefig(fig, bbox_inches='tight')
+        fig, ax = new_slide()
+        add_header(
+            ax,
+            'Section 2',
+            'What Wrangling Revealed',
+            'The processed benchmark is usable, but it is clearly imbalanced across cell types.',
+        )
+        add_bullets(ax, [
+            f'Batch1 ends with {batch1_cells:,} singlets and batch2 ends with {batch2_cells:,} singlets.',
+            'Major immune populations are preserved and ready for downstream classification.',
+            f'Class imbalance is substantial: abundant T-cell and monocyte groups dominate, while {rare} and other rare classes remain small.',
+            'This is why later sections should emphasize macro-F1 and per-class behavior rather than accuracy alone.',
+        ], x=0.06, y=0.66, width=49)
+        img = plt.imread(FIG / 'label_counts.png')
+        ax_img = fig.add_axes([0.57, 0.16, 0.34, 0.58])
+        ax_img.imshow(img)
+        ax_img.axis('off')
+        add_footer(ax, 'Bridge to EDA and baseline evaluation', 4)
+        pdf.savefig(fig)
         plt.close(fig)
 
 
