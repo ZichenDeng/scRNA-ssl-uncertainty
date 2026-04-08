@@ -1,0 +1,16 @@
+file,size_mb,kind
+GSE96583_batch1.genes.tsv.gz,0.25,gene metadata
+GSE96583_batch1.total.tsne.df.tsv.gz,0.36,cell metadata
+GSE96583_batch2.genes.tsv.gz,0.26,gene metadata
+GSE96583_batch2.total.tsne.df.tsv.gz,0.72,cell metadata
+GSE96583_genes.txt.gz,0.18,gene metadata
+GSM2560245_A.mat.gz,4.89,count matrix
+GSM2560245_barcodes.tsv.gz,0.01,other
+GSM2560246_B.mat.gz,5.22,count matrix
+GSM2560246_barcodes.tsv.gz,0.02,other
+GSM2560247_C.mat.gz,7.46,count matrix
+GSM2560247_barcodes.tsv.gz,0.02,other
+GSM2560248_2.1.mtx.gz,27.22,count matrix
+GSM2560248_barcodes.tsv.gz,0.05,other
+GSM2560249_2.2.mtx.gz,27.71,count matrix
+GSM2560249_barcodes.tsv.gz,0.05,other
