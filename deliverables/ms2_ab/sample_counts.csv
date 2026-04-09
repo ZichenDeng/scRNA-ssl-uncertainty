@@ -1,6 +1,6 @@
-batch,sample,cells
-batch1,GSM2560245_A,3132
-batch1,GSM2560246_B,3536
-batch1,GSM2560247_C,4764
-batch2,GSM2560248_2.1,12261
-batch2,GSM2560249_2.2,11989
+batch_label,sample_accession,sample_label,condition,cells
+batch1,GSM2560245_A,A,batch1,3087
+batch1,GSM2560246_B,B,batch1,3502
+batch1,GSM2560247_C,C,batch1,4719
+batch2,GSM2560248_2.1,ctrl,ctrl,12097
+batch2,GSM2560249_2.2,stim,stim,11809
