@@ -3,13 +3,30 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
+import umap
+
+from run_gse96583_dae_classifier import (
+    DAEConfig,
+    PCA_FEATURE_KEY,
+    PCA_N_COMPONENTS,
+    RANDOM_STATE,
+    encode_matrix,
+    load_modeling_dataset,
+    make_fixed_splits,
+    select_device,
+    set_seed,
+    train_autoencoder,
+)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +65,29 @@ DISPLAY_ORDER = [
 ]
 
 BEST_RUN = "SupDAE-32-head-w0.5-noise0.10"
+BEST_RUN_PREFIX = "gse96583_supdae_head_w05_noise010_e10"
+
+CELL_TYPE_ORDER = [
+    "B cells",
+    "CD4 T cells",
+    "CD8 T cells",
+    "NK cells",
+    "CD14+ Monocytes",
+    "FCGR3A+ Monocytes",
+    "Dendritic cells",
+    "Megakaryocytes",
+]
+
+CELL_TYPE_PALETTE = {
+    "B cells": "#2A9D8F",
+    "CD4 T cells": "#4C78A8",
+    "CD8 T cells": "#F28E2B",
+    "NK cells": "#B07AA1",
+    "CD14+ Monocytes": "#59A14F",
+    "FCGR3A+ Monocytes": "#E15759",
+    "Dendritic cells": "#9C755F",
+    "Megakaryocytes": "#EDC948",
+}
 
 
 def configure_style() -> None:
@@ -120,6 +160,13 @@ def build_variant_summary() -> pd.DataFrame:
             "delta_macro_f1_vs_pca",
         ]
     ]
+
+
+def load_best_run_config() -> DAEConfig:
+    run_summary = json.loads((RESULTS_ROOT / f"{BEST_RUN_PREFIX}_run_summary.json").read_text(encoding="utf-8"))
+    config_dict = run_summary["config"]
+    config_dict["hidden_dims"] = tuple(config_dict["hidden_dims"])
+    return DAEConfig(**config_dict)
 
 
 def save_csv(df: pd.DataFrame, name: str) -> None:
@@ -469,6 +516,135 @@ def draw_learning_modes_diagram(out_stem: str) -> None:
     plt.close(fig)
 
 
+def draw_representation_space(out_stem: str) -> None:
+    set_seed(RANDOM_STATE)
+    device = select_device("cpu")
+    adata, _, _ = load_modeling_dataset()
+    split_adata, train_adata, val_adata, _ = make_fixed_splits(adata)
+    config = load_best_run_config()
+
+    model, _, _ = train_autoencoder(
+        train_adata.X,
+        val_adata.X,
+        train_labels=train_adata.obs["cell_type"].astype(str).to_numpy(),
+        val_labels=val_adata.obs["cell_type"].astype(str).to_numpy(),
+        config=config,
+        device=device,
+    )
+
+    pca_features = np.asarray(split_adata.obsm[PCA_FEATURE_KEY])[:, :PCA_N_COMPONENTS]
+    dae_features = encode_matrix(model, split_adata.X, batch_size=config.batch_size, device=device)
+    labels = split_adata.obs["cell_type"].astype(str).to_numpy()
+    present_labels = [label for label in CELL_TYPE_ORDER if label in set(labels)]
+
+    pca_scaled = StandardScaler().fit_transform(pca_features)
+    dae_scaled = StandardScaler().fit_transform(dae_features)
+
+    reducer_kwargs = {
+        "n_neighbors": 30,
+        "min_dist": 0.20,
+        "metric": "euclidean",
+        "random_state": RANDOM_STATE,
+    }
+    pca_umap = umap.UMAP(**reducer_kwargs).fit_transform(pca_scaled)
+    dae_umap = umap.UMAP(**reducer_kwargs).fit_transform(dae_scaled)
+
+    fig, axes = plt.subplots(1, 2, figsize=(14.8, 8.8))
+    fig.subplots_adjust(left=0.05, right=0.98, top=0.82, bottom=0.21, wspace=0.10)
+
+    fig.text(0.05, 0.94, "PCA vs DAE Representation Space", fontsize=22, fontweight="bold", ha="left")
+    fig.text(
+        0.05,
+        0.90,
+        "Same fixed-split cells, colored by annotated cell type. UMAP is fit separately on standardized PCA-50 and best-run SupDAE latent features.",
+        fontsize=11.5,
+        color=COLORS["muted"],
+        ha="left",
+    )
+    fig.text(
+        0.98,
+        0.94,
+        "Best DAE: 32-d latent, noise 0.10, lambda 0.5",
+        fontsize=11.5,
+        color=COLORS["sup"],
+        ha="right",
+        fontweight="bold",
+    )
+
+    panel_titles = [
+        ("PCA-50 baseline", "UMAP of standardized PCA features"),
+        ("Best supervised DAE latent", "UMAP of 32-d latent representation"),
+    ]
+
+    for ax, embedding, (title, subtitle) in zip(axes, [pca_umap, dae_umap], panel_titles):
+        ax.set_facecolor("#FBFCFE")
+        for spine in ax.spines.values():
+            spine.set_visible(True)
+            spine.set_linewidth(1.0)
+            spine.set_edgecolor("#DDE5EF")
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_title(title, fontsize=15, fontweight="bold", pad=20)
+        ax.text(
+            0.0,
+            1.02,
+            subtitle,
+            transform=ax.transAxes,
+            ha="left",
+            va="bottom",
+            fontsize=10.5,
+            color=COLORS["muted"],
+        )
+        for label in present_labels:
+            mask = labels == label
+            ax.scatter(
+                embedding[mask, 0],
+                embedding[mask, 1],
+                s=10,
+                color=CELL_TYPE_PALETTE[label],
+                alpha=0.82,
+                linewidths=0,
+                rasterized=True,
+            )
+
+    handles = [
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            linestyle="",
+            markerfacecolor=CELL_TYPE_PALETTE[label],
+            markeredgecolor="none",
+            markersize=8,
+            label=label,
+        )
+        for label in present_labels
+    ]
+    fig.legend(
+        handles=handles,
+        labels=present_labels,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.08),
+        ncol=4,
+        frameon=False,
+        fontsize=10.5,
+        handletextpad=0.5,
+        columnspacing=1.6,
+    )
+    fig.text(
+        0.05,
+        0.04,
+        "Axes are arbitrary UMAP coordinates. The figure is qualitative and complements, rather than replaces, the metric comparison.",
+        fontsize=10,
+        color=COLORS["muted"],
+        ha="left",
+    )
+
+    fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=240)
+    fig.savefig(OUT_ROOT / f"{out_stem}.svg")
+    plt.close(fig)
+
+
 def build_readme() -> None:
     lines = [
         "# MS3 Autoencoder Assets",
@@ -485,6 +661,7 @@ def build_readme() -> None:
         "- `06_supervised_dae_pipeline.png/.svg`: clean method diagram",
         "- `07_unsupervised_dae_pipeline.png/.svg`: unsupervised method diagram with downstream classifier branch",
         "- `08_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides",
+        "- `09_pca_vs_dae_representation_space.png/.svg`: side-by-side UMAP comparison of PCA-50 and best supervised DAE latent space",
         "",
         "## Source results",
         "",
@@ -545,6 +722,7 @@ def main() -> None:
     draw_pipeline_diagram("06_supervised_dae_pipeline")
     draw_unsupervised_pipeline_diagram("07_unsupervised_dae_pipeline")
     draw_learning_modes_diagram("08_unsupervised_vs_supervised")
+    draw_representation_space("09_pca_vs_dae_representation_space")
     build_readme()
 
 

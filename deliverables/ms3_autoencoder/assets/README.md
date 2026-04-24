@@ -12,6 +12,7 @@ This folder contains clean reusable assets for the autoencoder PPT section.
 - `06_supervised_dae_pipeline.png/.svg`: clean method diagram
 - `07_unsupervised_dae_pipeline.png/.svg`: unsupervised method diagram with downstream classifier branch
 - `08_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides
+- `09_pca_vs_dae_representation_space.png/.svg`: side-by-side PCA vs supervised-DAE representation-space comparison for the test split
 
 ## Source results
 
