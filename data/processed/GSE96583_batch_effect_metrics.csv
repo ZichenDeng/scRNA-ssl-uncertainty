@@ -5,9 +5,9 @@ silhouette_cell_type,0.15544921159744263,before_harmony
 neighbor_same_batch,0.9949773764222563,before_harmony
 neighbor_same_condition,0.9728214157248064,before_harmony
 neighbor_same_cell_type,0.909496223093088,before_harmony
-silhouette_batch,-0.016285289078950882,after_harmony
-silhouette_condition,-0.002575658028945327,after_harmony
-silhouette_cell_type,0.21056529879570007,after_harmony
-neighbor_same_batch,0.7762802673179228,after_harmony
-neighbor_same_condition,0.7562503549724542,after_harmony
-neighbor_same_cell_type,0.9089718104541754,after_harmony
+silhouette_batch,-0.016280321404337883,after_harmony
+silhouette_condition,-0.0025794191751629114,after_harmony
+silhouette_cell_type,0.21056018769741058,after_harmony
+neighbor_same_batch,0.7762689081993904,after_harmony
+neighbor_same_condition,0.7562219571761232,after_harmony
+neighbor_same_cell_type,0.9089471990306885,after_harmony
