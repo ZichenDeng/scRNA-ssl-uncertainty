@@ -1,0 +1,257 @@
+true_label,predicted_label,count,representation,split
+B cells,B cells,537,PCA-50,val
+CD14+ Monocytes,B cells,0,PCA-50,val
+CD4 T cells,B cells,6,PCA-50,val
+CD8 T cells,B cells,2,PCA-50,val
+Dendritic cells,B cells,8,PCA-50,val
+FCGR3A+ Monocytes,B cells,1,PCA-50,val
+Megakaryocytes,B cells,2,PCA-50,val
+NK cells,B cells,0,PCA-50,val
+B cells,CD14+ Monocytes,1,PCA-50,val
+CD14+ Monocytes,CD14+ Monocytes,967,PCA-50,val
+CD4 T cells,CD14+ Monocytes,0,PCA-50,val
+CD8 T cells,CD14+ Monocytes,0,PCA-50,val
+Dendritic cells,CD14+ Monocytes,1,PCA-50,val
+FCGR3A+ Monocytes,CD14+ Monocytes,36,PCA-50,val
+Megakaryocytes,CD14+ Monocytes,1,PCA-50,val
+NK cells,CD14+ Monocytes,0,PCA-50,val
+B cells,CD4 T cells,5,PCA-50,val
+CD14+ Monocytes,CD4 T cells,1,PCA-50,val
+CD4 T cells,CD4 T cells,2158,PCA-50,val
+CD8 T cells,CD4 T cells,31,PCA-50,val
+Dendritic cells,CD4 T cells,0,PCA-50,val
+FCGR3A+ Monocytes,CD4 T cells,4,PCA-50,val
+Megakaryocytes,CD4 T cells,2,PCA-50,val
+NK cells,CD4 T cells,1,PCA-50,val
+B cells,CD8 T cells,0,PCA-50,val
+CD14+ Monocytes,CD8 T cells,0,PCA-50,val
+CD4 T cells,CD8 T cells,88,PCA-50,val
+CD8 T cells,CD8 T cells,428,PCA-50,val
+Dendritic cells,CD8 T cells,0,PCA-50,val
+FCGR3A+ Monocytes,CD8 T cells,0,PCA-50,val
+Megakaryocytes,CD8 T cells,0,PCA-50,val
+NK cells,CD8 T cells,55,PCA-50,val
+B cells,Dendritic cells,14,PCA-50,val
+CD14+ Monocytes,Dendritic cells,12,PCA-50,val
+CD4 T cells,Dendritic cells,0,PCA-50,val
+CD8 T cells,Dendritic cells,1,PCA-50,val
+Dendritic cells,Dendritic cells,77,PCA-50,val
+FCGR3A+ Monocytes,Dendritic cells,3,PCA-50,val
+Megakaryocytes,Dendritic cells,0,PCA-50,val
+NK cells,Dendritic cells,0,PCA-50,val
+B cells,FCGR3A+ Monocytes,1,PCA-50,val
+CD14+ Monocytes,FCGR3A+ Monocytes,83,PCA-50,val
+CD4 T cells,FCGR3A+ Monocytes,4,PCA-50,val
+CD8 T cells,FCGR3A+ Monocytes,0,PCA-50,val
+Dendritic cells,FCGR3A+ Monocytes,5,PCA-50,val
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,275,PCA-50,val
+Megakaryocytes,FCGR3A+ Monocytes,0,PCA-50,val
+NK cells,FCGR3A+ Monocytes,1,PCA-50,val
+B cells,Megakaryocytes,3,PCA-50,val
+CD14+ Monocytes,Megakaryocytes,2,PCA-50,val
+CD4 T cells,Megakaryocytes,23,PCA-50,val
+CD8 T cells,Megakaryocytes,2,PCA-50,val
+Dendritic cells,Megakaryocytes,1,PCA-50,val
+FCGR3A+ Monocytes,Megakaryocytes,2,PCA-50,val
+Megakaryocytes,Megakaryocytes,32,PCA-50,val
+NK cells,Megakaryocytes,1,PCA-50,val
+B cells,NK cells,0,PCA-50,val
+CD14+ Monocytes,NK cells,0,PCA-50,val
+CD4 T cells,NK cells,0,PCA-50,val
+CD8 T cells,NK cells,42,PCA-50,val
+Dendritic cells,NK cells,0,PCA-50,val
+FCGR3A+ Monocytes,NK cells,0,PCA-50,val
+Megakaryocytes,NK cells,1,PCA-50,val
+NK cells,NK cells,432,PCA-50,val
+B cells,B cells,540,PCA-50,test
+CD14+ Monocytes,B cells,0,PCA-50,test
+CD4 T cells,B cells,4,PCA-50,test
+CD8 T cells,B cells,0,PCA-50,test
+Dendritic cells,B cells,5,PCA-50,test
+FCGR3A+ Monocytes,B cells,3,PCA-50,test
+Megakaryocytes,B cells,0,PCA-50,test
+NK cells,B cells,0,PCA-50,test
+B cells,CD14+ Monocytes,0,PCA-50,test
+CD14+ Monocytes,CD14+ Monocytes,981,PCA-50,test
+CD4 T cells,CD14+ Monocytes,0,PCA-50,test
+CD8 T cells,CD14+ Monocytes,0,PCA-50,test
+Dendritic cells,CD14+ Monocytes,4,PCA-50,test
+FCGR3A+ Monocytes,CD14+ Monocytes,41,PCA-50,test
+Megakaryocytes,CD14+ Monocytes,0,PCA-50,test
+NK cells,CD14+ Monocytes,0,PCA-50,test
+B cells,CD4 T cells,12,PCA-50,test
+CD14+ Monocytes,CD4 T cells,0,PCA-50,test
+CD4 T cells,CD4 T cells,2149,PCA-50,test
+CD8 T cells,CD4 T cells,33,PCA-50,test
+Dendritic cells,CD4 T cells,2,PCA-50,test
+FCGR3A+ Monocytes,CD4 T cells,2,PCA-50,test
+Megakaryocytes,CD4 T cells,3,PCA-50,test
+NK cells,CD4 T cells,0,PCA-50,test
+B cells,CD8 T cells,1,PCA-50,test
+CD14+ Monocytes,CD8 T cells,0,PCA-50,test
+CD4 T cells,CD8 T cells,91,PCA-50,test
+CD8 T cells,CD8 T cells,429,PCA-50,test
+Dendritic cells,CD8 T cells,0,PCA-50,test
+FCGR3A+ Monocytes,CD8 T cells,0,PCA-50,test
+Megakaryocytes,CD8 T cells,0,PCA-50,test
+NK cells,CD8 T cells,37,PCA-50,test
+B cells,Dendritic cells,5,PCA-50,test
+CD14+ Monocytes,Dendritic cells,14,PCA-50,test
+CD4 T cells,Dendritic cells,2,PCA-50,test
+CD8 T cells,Dendritic cells,0,PCA-50,test
+Dendritic cells,Dendritic cells,81,PCA-50,test
+FCGR3A+ Monocytes,Dendritic cells,2,PCA-50,test
+Megakaryocytes,Dendritic cells,0,PCA-50,test
+NK cells,Dendritic cells,0,PCA-50,test
+B cells,FCGR3A+ Monocytes,1,PCA-50,test
+CD14+ Monocytes,FCGR3A+ Monocytes,68,PCA-50,test
+CD4 T cells,FCGR3A+ Monocytes,4,PCA-50,test
+CD8 T cells,FCGR3A+ Monocytes,1,PCA-50,test
+Dendritic cells,FCGR3A+ Monocytes,1,PCA-50,test
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,271,PCA-50,test
+Megakaryocytes,FCGR3A+ Monocytes,0,PCA-50,test
+NK cells,FCGR3A+ Monocytes,0,PCA-50,test
+B cells,Megakaryocytes,2,PCA-50,test
+CD14+ Monocytes,Megakaryocytes,2,PCA-50,test
+CD4 T cells,Megakaryocytes,28,PCA-50,test
+CD8 T cells,Megakaryocytes,1,PCA-50,test
+Dendritic cells,Megakaryocytes,0,PCA-50,test
+FCGR3A+ Monocytes,Megakaryocytes,1,PCA-50,test
+Megakaryocytes,Megakaryocytes,33,PCA-50,test
+NK cells,Megakaryocytes,0,PCA-50,test
+B cells,NK cells,0,PCA-50,test
+CD14+ Monocytes,NK cells,0,PCA-50,test
+CD4 T cells,NK cells,1,PCA-50,test
+CD8 T cells,NK cells,42,PCA-50,test
+Dendritic cells,NK cells,0,PCA-50,test
+FCGR3A+ Monocytes,NK cells,1,PCA-50,test
+Megakaryocytes,NK cells,1,PCA-50,test
+NK cells,NK cells,454,PCA-50,test
+B cells,B cells,531,DAE-32,val
+CD14+ Monocytes,B cells,0,DAE-32,val
+CD4 T cells,B cells,2,DAE-32,val
+CD8 T cells,B cells,0,DAE-32,val
+Dendritic cells,B cells,8,DAE-32,val
+FCGR3A+ Monocytes,B cells,1,DAE-32,val
+Megakaryocytes,B cells,5,DAE-32,val
+NK cells,B cells,0,DAE-32,val
+B cells,CD14+ Monocytes,1,DAE-32,val
+CD14+ Monocytes,CD14+ Monocytes,937,DAE-32,val
+CD4 T cells,CD14+ Monocytes,0,DAE-32,val
+CD8 T cells,CD14+ Monocytes,0,DAE-32,val
+Dendritic cells,CD14+ Monocytes,1,DAE-32,val
+FCGR3A+ Monocytes,CD14+ Monocytes,42,DAE-32,val
+Megakaryocytes,CD14+ Monocytes,8,DAE-32,val
+NK cells,CD14+ Monocytes,0,DAE-32,val
+B cells,CD4 T cells,1,DAE-32,val
+CD14+ Monocytes,CD4 T cells,0,DAE-32,val
+CD4 T cells,CD4 T cells,1918,DAE-32,val
+CD8 T cells,CD4 T cells,38,DAE-32,val
+Dendritic cells,CD4 T cells,0,DAE-32,val
+FCGR3A+ Monocytes,CD4 T cells,2,DAE-32,val
+Megakaryocytes,CD4 T cells,9,DAE-32,val
+NK cells,CD4 T cells,1,DAE-32,val
+B cells,CD8 T cells,2,DAE-32,val
+CD14+ Monocytes,CD8 T cells,0,DAE-32,val
+CD4 T cells,CD8 T cells,107,DAE-32,val
+CD8 T cells,CD8 T cells,390,DAE-32,val
+Dendritic cells,CD8 T cells,0,DAE-32,val
+FCGR3A+ Monocytes,CD8 T cells,0,DAE-32,val
+Megakaryocytes,CD8 T cells,1,DAE-32,val
+NK cells,CD8 T cells,77,DAE-32,val
+B cells,Dendritic cells,13,DAE-32,val
+CD14+ Monocytes,Dendritic cells,22,DAE-32,val
+CD4 T cells,Dendritic cells,0,DAE-32,val
+CD8 T cells,Dendritic cells,1,DAE-32,val
+Dendritic cells,Dendritic cells,80,DAE-32,val
+FCGR3A+ Monocytes,Dendritic cells,8,DAE-32,val
+Megakaryocytes,Dendritic cells,0,DAE-32,val
+NK cells,Dendritic cells,0,DAE-32,val
+B cells,FCGR3A+ Monocytes,0,DAE-32,val
+CD14+ Monocytes,FCGR3A+ Monocytes,78,DAE-32,val
+CD4 T cells,FCGR3A+ Monocytes,1,DAE-32,val
+CD8 T cells,FCGR3A+ Monocytes,0,DAE-32,val
+Dendritic cells,FCGR3A+ Monocytes,2,DAE-32,val
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,258,DAE-32,val
+Megakaryocytes,FCGR3A+ Monocytes,1,DAE-32,val
+NK cells,FCGR3A+ Monocytes,0,DAE-32,val
+B cells,Megakaryocytes,13,DAE-32,val
+CD14+ Monocytes,Megakaryocytes,28,DAE-32,val
+CD4 T cells,Megakaryocytes,249,DAE-32,val
+CD8 T cells,Megakaryocytes,16,DAE-32,val
+Dendritic cells,Megakaryocytes,1,DAE-32,val
+FCGR3A+ Monocytes,Megakaryocytes,10,DAE-32,val
+Megakaryocytes,Megakaryocytes,13,DAE-32,val
+NK cells,Megakaryocytes,3,DAE-32,val
+B cells,NK cells,0,DAE-32,val
+CD14+ Monocytes,NK cells,0,DAE-32,val
+CD4 T cells,NK cells,2,DAE-32,val
+CD8 T cells,NK cells,61,DAE-32,val
+Dendritic cells,NK cells,0,DAE-32,val
+FCGR3A+ Monocytes,NK cells,0,DAE-32,val
+Megakaryocytes,NK cells,1,DAE-32,val
+NK cells,NK cells,409,DAE-32,val
+B cells,B cells,534,DAE-32,test
+CD14+ Monocytes,B cells,0,DAE-32,test
+CD4 T cells,B cells,1,DAE-32,test
+CD8 T cells,B cells,0,DAE-32,test
+Dendritic cells,B cells,6,DAE-32,test
+FCGR3A+ Monocytes,B cells,4,DAE-32,test
+Megakaryocytes,B cells,5,DAE-32,test
+NK cells,B cells,0,DAE-32,test
+B cells,CD14+ Monocytes,0,DAE-32,test
+CD14+ Monocytes,CD14+ Monocytes,950,DAE-32,test
+CD4 T cells,CD14+ Monocytes,0,DAE-32,test
+CD8 T cells,CD14+ Monocytes,0,DAE-32,test
+Dendritic cells,CD14+ Monocytes,4,DAE-32,test
+FCGR3A+ Monocytes,CD14+ Monocytes,41,DAE-32,test
+Megakaryocytes,CD14+ Monocytes,3,DAE-32,test
+NK cells,CD14+ Monocytes,0,DAE-32,test
+B cells,CD4 T cells,6,DAE-32,test
+CD14+ Monocytes,CD4 T cells,0,DAE-32,test
+CD4 T cells,CD4 T cells,1951,DAE-32,test
+CD8 T cells,CD4 T cells,30,DAE-32,test
+Dendritic cells,CD4 T cells,0,DAE-32,test
+FCGR3A+ Monocytes,CD4 T cells,1,DAE-32,test
+Megakaryocytes,CD4 T cells,9,DAE-32,test
+NK cells,CD4 T cells,0,DAE-32,test
+B cells,CD8 T cells,2,DAE-32,test
+CD14+ Monocytes,CD8 T cells,0,DAE-32,test
+CD4 T cells,CD8 T cells,113,DAE-32,test
+CD8 T cells,CD8 T cells,404,DAE-32,test
+Dendritic cells,CD8 T cells,0,DAE-32,test
+FCGR3A+ Monocytes,CD8 T cells,0,DAE-32,test
+Megakaryocytes,CD8 T cells,0,DAE-32,test
+NK cells,CD8 T cells,83,DAE-32,test
+B cells,Dendritic cells,5,DAE-32,test
+CD14+ Monocytes,Dendritic cells,22,DAE-32,test
+CD4 T cells,Dendritic cells,0,DAE-32,test
+CD8 T cells,Dendritic cells,0,DAE-32,test
+Dendritic cells,Dendritic cells,77,DAE-32,test
+FCGR3A+ Monocytes,Dendritic cells,3,DAE-32,test
+Megakaryocytes,Dendritic cells,0,DAE-32,test
+NK cells,Dendritic cells,0,DAE-32,test
+B cells,FCGR3A+ Monocytes,1,DAE-32,test
+CD14+ Monocytes,FCGR3A+ Monocytes,66,DAE-32,test
+CD4 T cells,FCGR3A+ Monocytes,0,DAE-32,test
+CD8 T cells,FCGR3A+ Monocytes,0,DAE-32,test
+Dendritic cells,FCGR3A+ Monocytes,2,DAE-32,test
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,268,DAE-32,test
+Megakaryocytes,FCGR3A+ Monocytes,0,DAE-32,test
+NK cells,FCGR3A+ Monocytes,2,DAE-32,test
+B cells,Megakaryocytes,13,DAE-32,test
+CD14+ Monocytes,Megakaryocytes,27,DAE-32,test
+CD4 T cells,Megakaryocytes,213,DAE-32,test
+CD8 T cells,Megakaryocytes,19,DAE-32,test
+Dendritic cells,Megakaryocytes,4,DAE-32,test
+FCGR3A+ Monocytes,Megakaryocytes,4,DAE-32,test
+Megakaryocytes,Megakaryocytes,20,DAE-32,test
+NK cells,Megakaryocytes,2,DAE-32,test
+B cells,NK cells,0,DAE-32,test
+CD14+ Monocytes,NK cells,0,DAE-32,test
+CD4 T cells,NK cells,1,DAE-32,test
+CD8 T cells,NK cells,53,DAE-32,test
+Dendritic cells,NK cells,0,DAE-32,test
+FCGR3A+ Monocytes,NK cells,0,DAE-32,test
+Megakaryocytes,NK cells,0,DAE-32,test
+NK cells,NK cells,404,DAE-32,test

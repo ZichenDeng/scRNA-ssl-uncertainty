@@ -1,0 +1,29 @@
+{
+  "data_path": "/home/zichende/projects/scRNA-ssl-uncertainty/data/processed/GSE96583_combined_shared_qc_singlets_lite.h5ad",
+  "dataset_source": "lite_fallback_cached",
+  "device": "cpu",
+  "config": {
+    "input_dim": 14222,
+    "latent_dim": 32,
+    "hidden_dims": [
+      512,
+      128
+    ],
+    "noise_type": "dropout",
+    "noise_level": 0.2,
+    "reconstruction_loss": "mse",
+    "classifier": "logistic_regression",
+    "batch_size": 256,
+    "epochs": 3,
+    "learning_rate": 0.001,
+    "hidden_dropout": 0.1,
+    "weight_decay": 1e-05,
+    "patience": 2
+  },
+  "best_val_loss": 0.13197481759193233,
+  "metrics_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_dae_classifier_metrics.csv",
+  "per_class_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_dae_classifier_per_class.csv",
+  "confusion_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_dae_classifier_confusions.csv",
+  "history_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_dae_training_history.csv",
+  "slides_file": "/home/zichende/projects/scRNA-ssl-uncertainty/deliverables/ms3_autoencoder/MS3_DAE_Slides.md"
+}

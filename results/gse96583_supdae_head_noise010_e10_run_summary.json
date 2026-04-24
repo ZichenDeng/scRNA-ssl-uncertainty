@@ -1,0 +1,32 @@
+{
+  "data_path": "/home/zichende/projects/scRNA-ssl-uncertainty/data/processed/GSE96583_combined_shared_qc_singlets_lite.h5ad",
+  "dataset_source": "lite_fallback_cached",
+  "device": "cpu",
+  "representation_name": "SupDAE-32-head-noise0.10",
+  "output_prefix": "gse96583_supdae_head_noise010_e10",
+  "config": {
+    "input_dim": 14222,
+    "latent_dim": 32,
+    "hidden_dims": [
+      512,
+      128
+    ],
+    "noise_type": "dropout",
+    "noise_level": 0.1,
+    "reconstruction_loss": "mse",
+    "classifier": "supervised_head",
+    "supervised_loss_weight": 1.0,
+    "batch_size": 512,
+    "epochs": 10,
+    "learning_rate": 0.001,
+    "hidden_dropout": 0.1,
+    "weight_decay": 1e-05,
+    "patience": 4
+  },
+  "best_val_loss": 0.3503466918507677,
+  "metrics_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_supdae_head_noise010_e10_metrics.csv",
+  "per_class_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_supdae_head_noise010_e10_per_class.csv",
+  "confusion_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_supdae_head_noise010_e10_confusions.csv",
+  "history_file": "/home/zichende/projects/scRNA-ssl-uncertainty/results/gse96583_supdae_head_noise010_e10_training_history.csv",
+  "slides_file": "/home/zichende/projects/scRNA-ssl-uncertainty/deliverables/ms3_autoencoder/gse96583_supdae_head_noise010_e10_slides.md"
+}

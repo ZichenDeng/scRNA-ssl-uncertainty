@@ -309,6 +309,7 @@ def preprocess_batch(adata: ad.AnnData) -> tuple[ad.AnnData, dict[str, int]]:
     sc.pp.scrublet(
         scrublet_input,
         expected_doublet_rate=SCRUBLET_EXPECTED_DOUBLET_RATE,
+        use_approx_neighbors=False,
         random_state=0,
         verbose=False,
     )

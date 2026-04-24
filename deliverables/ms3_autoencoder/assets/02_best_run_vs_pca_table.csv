@@ -1,0 +1,5 @@
+Metric,PCA-50,SupDAE w=0.5,Delta
+Accuracy,0.922,0.943,+0.021
+Macro-F1,0.858,0.898,+0.041
+Balanced Acc.,0.901,0.868,-0.032
+Weighted-F1,0.925,0.942,+0.018
