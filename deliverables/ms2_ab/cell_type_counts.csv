@@ -1,9 +1,9 @@
-cell_type,batch1,batch2
-B cells,1203,2537
-CD14+ Monocytes,1814,5287
-CD4 T cells,4949,10245
-CD8 T cells,1350,2022
-Dendritic cells,188,427
-FCGR3A+ Monocytes,573,1567
-Megakaryocytes,47,203
-NK cells,1308,1962
+cell_type,cells,percent,is_rare_under_2pct
+CD4 T cells,15163,43.05957857670244,False
+CD14+ Monocytes,6939,19.70523087408417,False
+B cells,3684,10.461748168342137,False
+CD8 T cells,3333,9.464985517123871,False
+NK cells,3234,9.183847333446925,False
+FCGR3A+ Monocytes,2068,5.872664281251775,False
+Dendritic cells,547,1.5533594593059579,True
+Megakaryocytes,246,0.6985857897427159,True

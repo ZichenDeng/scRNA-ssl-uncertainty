@@ -1,0 +1,9 @@
+batch_label,stage,cells,genes,shared_genes_after_qc_singlets
+batch1,raw,14030,32738,14222
+batch1,qc_filtered,13385,14794,14222
+batch1,metadata_singlets,11432,14794,14222
+batch1,strict_qc_final,11308,14794,14222
+batch2,raw,29065,35635,14222
+batch2,qc_filtered,28871,16142,14222
+batch2,metadata_singlets,24250,16142,14222
+batch2,strict_qc_final,23906,16142,14222

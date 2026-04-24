@@ -1,0 +1,13 @@
+metric,value,embedding
+silhouette_batch,0.0975661724805831,before_harmony
+silhouette_condition,0.113354817032814,before_harmony
+silhouette_cell_type,0.1554492115974426,before_harmony
+neighbor_same_batch,0.9949773764222564,before_harmony
+neighbor_same_condition,0.9728214157248064,before_harmony
+neighbor_same_cell_type,0.909496223093088,before_harmony
+silhouette_batch,-0.0162804163992404,after_harmony
+silhouette_condition,-0.0025789926294237,after_harmony
+silhouette_cell_type,0.2105603963136673,after_harmony
+neighbor_same_batch,0.7762670150129684,after_harmony
+neighbor_same_condition,0.756218170803279,after_harmony
+neighbor_same_cell_type,0.9089490922171106,after_harmony

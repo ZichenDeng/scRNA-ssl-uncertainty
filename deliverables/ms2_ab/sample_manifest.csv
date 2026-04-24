@@ -1,0 +1,6 @@
+batch_label,sample_accession,sample_label,condition,matrix_format,description
+batch1,GSM2560245_A,A,batch1,MAT,batch 1 sample A
+batch1,GSM2560246_B,B,batch1,MAT,batch 1 sample B
+batch1,GSM2560247_C,C,batch1,MAT,batch 1 sample C
+batch2,GSM2560248_2.1,ctrl,ctrl,MTX,batch 2 control
+batch2,GSM2560249_2.2,stim,stim,MTX,batch 2 IFN-beta stimulation
