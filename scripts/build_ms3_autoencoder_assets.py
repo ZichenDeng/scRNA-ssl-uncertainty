@@ -380,9 +380,9 @@ def draw_pipeline_diagram(out_stem: str) -> None:
     add_arrow(ax, 0.87, 0.67, 0.90, 0.67, color=COLORS["sup"])
     add_arrow(ax, 0.87, 0.31, 0.90, 0.31, color=COLORS["dae"])
 
-    ax.text(0.04, 0.13, "Training objective", fontsize=13, fontweight="bold")
-    ax.text(0.19, 0.13, "= reconstruction loss  +  lambda * classification loss", fontsize=13)
-    ax.text(0.19, 0.07, "Best setting: lambda = 0.5", fontsize=12, color=COLORS["sup"], fontweight="bold")
+    ax.text(0.04, 0.13, "Training objective:", fontsize=13, fontweight="bold")
+    ax.text(0.25, 0.13, "reconstruction loss + lambda * classification loss", fontsize=13)
+    ax.text(0.25, 0.07, "Best setting: lambda = 0.5", fontsize=12, color=COLORS["sup"], fontweight="bold")
 
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
@@ -427,9 +427,9 @@ def draw_unsupervised_pipeline_diagram(out_stem: str) -> None:
     ax.plot([0.71, 0.985], [0.78, 0.78], color=COLORS["grid"], linewidth=1.2, linestyle=(0, (4, 3)))
     ax.plot([0.71, 0.71], [0.18, 0.78], color=COLORS["grid"], linewidth=1.2, linestyle=(0, (4, 3)))
 
-    ax.text(0.04, 0.13, "Training objective", fontsize=13, fontweight="bold")
-    ax.text(0.19, 0.13, "= reconstruction loss only", fontsize=13)
-    ax.text(0.19, 0.07, "Classifier is fitted afterward on latent z", fontsize=12, color=COLORS["pca"], fontweight="bold")
+    ax.text(0.04, 0.13, "Training objective:", fontsize=13, fontweight="bold")
+    ax.text(0.25, 0.13, "reconstruction loss only", fontsize=13)
+    ax.text(0.25, 0.07, "Classifier is fitted afterward on latent z", fontsize=12, color=COLORS["pca"], fontweight="bold")
 
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
