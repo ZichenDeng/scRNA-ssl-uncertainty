@@ -10,7 +10,8 @@ This folder contains clean reusable assets for the autoencoder PPT section.
 - `04_best_run_per_class_delta.png/.svg/.csv`: per-class F1 change for the best supervised run minus PCA
 - `05_best_run_training_curve.png/.svg`: training curve and validation loss breakdown
 - `06_supervised_dae_pipeline.png/.svg`: clean method diagram
-- `07_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides
+- `07_unsupervised_dae_pipeline.png/.svg`: unsupervised method diagram with downstream classifier branch
+- `08_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides
 
 ## Source results
 

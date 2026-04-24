@@ -75,6 +75,13 @@ def configure_style() -> None:
 
 def ensure_out_dir() -> None:
     OUT_ROOT.mkdir(parents=True, exist_ok=True)
+    for legacy_name in [
+        "07_unsupervised_vs_supervised.png",
+        "07_unsupervised_vs_supervised.svg",
+    ]:
+        legacy_path = OUT_ROOT / legacy_name
+        if legacy_path.exists():
+            legacy_path.unlink()
 
 
 def read_metrics(path: Path) -> pd.DataFrame:
@@ -215,7 +222,7 @@ def build_best_run_table(variant_summary: pd.DataFrame) -> pd.DataFrame:
 
 
 def draw_best_run_metric_plot(best_run_table: pd.DataFrame, out_stem: str) -> None:
-    fig, ax = plt.subplots(figsize=(11, 4.8))
+    fig, ax = plt.subplots(figsize=(11.8, 5.2))
     rows = best_run_table.copy()
     metrics = rows["Metric"].tolist()
     y = np.arange(len(metrics))
@@ -231,11 +238,13 @@ def draw_best_run_metric_plot(best_run_table: pd.DataFrame, out_stem: str) -> No
 
     ax.set_yticks(y, metrics)
     ax.invert_yaxis()
-    ax.set_xlim(0.78, 0.98)
+    ax.set_xlim(0.78, 0.985)
     ax.set_xlabel("Test score")
     ax.set_title("Best Run vs PCA", pad=14, fontweight="bold")
     ax.grid(axis="x", color=COLORS["grid"], linewidth=0.8)
-    ax.legend(loc="lower right")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=2)
+
+    fig.subplots_adjust(bottom=0.20)
 
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
@@ -266,6 +275,12 @@ def draw_per_class_delta(delta_df: pd.DataFrame, out_stem: str) -> None:
         offset = 0.004 if value >= 0 else -0.004
         ax.text(value + offset, idx, f"{value:+.3f}", va="center", ha=ha, fontsize=10, color=COLORS["text"])
 
+    max_delta = float(delta_df["delta_f1"].max())
+    min_delta = float(delta_df["delta_f1"].min())
+    left_pad = 0.01 if min_delta >= 0 else 0.02
+    right_pad = 0.02
+    ax.set_xlim(min(0.0, min_delta - left_pad), max_delta + right_pad)
+
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
     plt.close(fig)
@@ -273,7 +288,7 @@ def draw_per_class_delta(delta_df: pd.DataFrame, out_stem: str) -> None:
 
 def draw_training_curve(out_stem: str) -> None:
     history = pd.read_csv(RESULTS_ROOT / "gse96583_supdae_head_w05_noise010_e10_training_history.csv")
-    fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.5))
+    fig, axes = plt.subplots(1, 2, figsize=(12.8, 4.8))
 
     axes[0].plot(history["epoch"], history["train_loss"], marker="o", color=COLORS["line_train"], label="Train total loss")
     axes[0].plot(history["epoch"], history["val_loss"], marker="o", color=COLORS["line_val"], label="Val total loss")
@@ -281,7 +296,7 @@ def draw_training_curve(out_stem: str) -> None:
     axes[0].set_xlabel("Epoch")
     axes[0].set_ylabel("Loss")
     axes[0].grid(color=COLORS["grid"], linewidth=0.8)
-    axes[0].legend(loc="upper right")
+    axes[0].legend(loc="upper center", bbox_to_anchor=(0.5, 1.00), ncol=2)
 
     axes[1].plot(history["epoch"], history["val_recon_loss"], marker="o", color=COLORS["dae"], label="Val recon")
     axes[1].plot(history["epoch"], history["val_class_loss"], marker="o", color=COLORS["accent"], label="Val class")
@@ -289,7 +304,9 @@ def draw_training_curve(out_stem: str) -> None:
     axes[1].set_xlabel("Epoch")
     axes[1].set_ylabel("Loss")
     axes[1].grid(color=COLORS["grid"], linewidth=0.8)
-    axes[1].legend(loc="upper right")
+    axes[1].legend(loc="upper center", bbox_to_anchor=(0.5, 1.00), ncol=2)
+
+    fig.subplots_adjust(top=0.88, wspace=0.22)
 
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
@@ -311,13 +328,27 @@ def add_box(ax, x: float, y: float, w: float, h: float, label: str, facecolor: s
     ax.text(x + w / 2, y + h / 2, label, ha="center", va="center", fontsize=fontsize, fontweight="bold")
 
 
+def add_light_box(ax, x: float, y: float, w: float, h: float, label: str, edgecolor: str, fontsize: int = 11) -> None:
+    patch = FancyBboxPatch(
+        (x, y),
+        w,
+        h,
+        boxstyle="round,pad=0.02,rounding_size=0.03",
+        linewidth=1.4,
+        edgecolor=edgecolor,
+        facecolor="#FFFFFF",
+    )
+    ax.add_patch(patch)
+    ax.text(x + w / 2, y + h / 2, label, ha="center", va="center", fontsize=fontsize, color=COLORS["text"])
+
+
 def add_arrow(ax, x1: float, y1: float, x2: float, y2: float, color: str = COLORS["muted"]) -> None:
     arrow = FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-|>", mutation_scale=14, linewidth=1.4, color=color)
     ax.add_patch(arrow)
 
 
 def draw_pipeline_diagram(out_stem: str) -> None:
-    fig, ax = plt.subplots(figsize=(13, 5.2))
+    fig, ax = plt.subplots(figsize=(13.6, 5.6))
     ax.set_axis_off()
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
@@ -336,23 +367,69 @@ def draw_pipeline_diagram(out_stem: str) -> None:
     add_box(ax, 0.20, 0.40, 0.12, 0.18, "Dropout\ncorruption", "#D6EDEB")
     add_box(ax, 0.38, 0.40, 0.13, 0.18, "Encoder", "#B7D1F0")
     add_box(ax, 0.57, 0.40, 0.10, 0.18, "Latent z", "#A7E1DB")
-    add_box(ax, 0.74, 0.57, 0.13, 0.15, "Classifier\nhead", "#BEE8D8")
-    add_box(ax, 0.74, 0.23, 0.13, 0.15, "Decoder", "#B7D1F0")
+    add_box(ax, 0.75, 0.60, 0.12, 0.14, "Classifier\nhead", "#BEE8D8")
+    add_box(ax, 0.75, 0.24, 0.12, 0.14, "Decoder", "#B7D1F0")
+    add_light_box(ax, 0.90, 0.60, 0.08, 0.14, "Cell type\nprediction", COLORS["sup"])
+    add_light_box(ax, 0.90, 0.24, 0.08, 0.14, "Input\nreconstruction", COLORS["dae"])
 
     add_arrow(ax, 0.15, 0.49, 0.20, 0.49)
     add_arrow(ax, 0.32, 0.49, 0.38, 0.49)
     add_arrow(ax, 0.51, 0.49, 0.57, 0.49)
-    add_arrow(ax, 0.67, 0.53, 0.74, 0.64, color=COLORS["sup"])
-    add_arrow(ax, 0.67, 0.45, 0.74, 0.30, color=COLORS["dae"])
+    add_arrow(ax, 0.67, 0.53, 0.75, 0.67, color=COLORS["sup"])
+    add_arrow(ax, 0.67, 0.45, 0.75, 0.31, color=COLORS["dae"])
+    add_arrow(ax, 0.87, 0.67, 0.90, 0.67, color=COLORS["sup"])
+    add_arrow(ax, 0.87, 0.31, 0.90, 0.31, color=COLORS["dae"])
 
-    ax.text(0.90, 0.64, "Cell type\nprediction", ha="center", va="center", fontsize=11, color=COLORS["text"])
-    ax.text(0.90, 0.30, "Input\nreconstruction", ha="center", va="center", fontsize=11, color=COLORS["text"])
-    add_arrow(ax, 0.87, 0.64, 0.94, 0.64, color=COLORS["sup"])
-    add_arrow(ax, 0.87, 0.30, 0.94, 0.30, color=COLORS["dae"])
+    ax.text(0.04, 0.13, "Training objective", fontsize=13, fontweight="bold")
+    ax.text(0.19, 0.13, "= reconstruction loss  +  lambda * classification loss", fontsize=13)
+    ax.text(0.19, 0.07, "Best setting: lambda = 0.5", fontsize=12, color=COLORS["sup"], fontweight="bold")
 
-    ax.text(0.04, 0.13, "Loss", fontsize=13, fontweight="bold")
-    ax.text(0.11, 0.13, "= reconstruction loss  +  lambda * classification loss", fontsize=13)
-    ax.text(0.57, 0.13, "best lambda = 0.5", fontsize=12, color=COLORS["sup"], fontweight="bold")
+    fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
+    fig.savefig(OUT_ROOT / f"{out_stem}.svg")
+    plt.close(fig)
+
+
+def draw_unsupervised_pipeline_diagram(out_stem: str) -> None:
+    fig, ax = plt.subplots(figsize=(13.8, 5.8))
+    ax.set_axis_off()
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+
+    ax.text(0.02, 0.95, "Unsupervised DAE Pipeline", fontsize=18, fontweight="bold", ha="left")
+    ax.text(
+        0.02,
+        0.89,
+        "The autoencoder is trained without labels, then latent z is used by a downstream logistic-regression classifier.",
+        fontsize=11,
+        color=COLORS["muted"],
+        ha="left",
+    )
+
+    add_box(ax, 0.03, 0.42, 0.12, 0.18, "Gene\nexpression", "#C9D7E8")
+    add_box(ax, 0.20, 0.42, 0.12, 0.18, "Dropout\ncorruption", "#D6EDEB")
+    add_box(ax, 0.38, 0.42, 0.13, 0.18, "Encoder", "#B7D1F0")
+    add_box(ax, 0.57, 0.42, 0.10, 0.18, "Latent z", "#A7E1DB")
+    add_box(ax, 0.75, 0.24, 0.12, 0.14, "Decoder", "#B7D1F0")
+    add_light_box(ax, 0.90, 0.24, 0.08, 0.14, "Input\nreconstruction", COLORS["dae"])
+
+    add_box(ax, 0.75, 0.61, 0.12, 0.14, "Logistic\nregression", "#C9D7E8")
+    add_light_box(ax, 0.90, 0.61, 0.08, 0.14, "Cell type\nprediction", COLORS["pca"])
+
+    add_arrow(ax, 0.15, 0.51, 0.20, 0.51)
+    add_arrow(ax, 0.32, 0.51, 0.38, 0.51)
+    add_arrow(ax, 0.51, 0.51, 0.57, 0.51)
+    add_arrow(ax, 0.67, 0.47, 0.75, 0.31, color=COLORS["dae"])
+    add_arrow(ax, 0.67, 0.55, 0.75, 0.68, color=COLORS["pca"])
+    add_arrow(ax, 0.87, 0.31, 0.90, 0.31, color=COLORS["dae"])
+    add_arrow(ax, 0.87, 0.68, 0.90, 0.68, color=COLORS["pca"])
+
+    ax.text(0.72, 0.80, "Downstream evaluation after AE pretraining", fontsize=10.5, color=COLORS["muted"], ha="left")
+    ax.plot([0.71, 0.985], [0.78, 0.78], color=COLORS["grid"], linewidth=1.2, linestyle=(0, (4, 3)))
+    ax.plot([0.71, 0.71], [0.18, 0.78], color=COLORS["grid"], linewidth=1.2, linestyle=(0, (4, 3)))
+
+    ax.text(0.04, 0.13, "Training objective", fontsize=13, fontweight="bold")
+    ax.text(0.19, 0.13, "= reconstruction loss only", fontsize=13)
+    ax.text(0.19, 0.07, "Classifier is fitted afterward on latent z", fontsize=12, color=COLORS["pca"], fontweight="bold")
 
     fig.savefig(OUT_ROOT / f"{out_stem}.png", dpi=220)
     fig.savefig(OUT_ROOT / f"{out_stem}.svg")
@@ -406,7 +483,8 @@ def build_readme() -> None:
         "- `04_best_run_per_class_delta.png/.svg/.csv`: per-class F1 change for the best supervised run minus PCA",
         "- `05_best_run_training_curve.png/.svg`: training curve and validation loss breakdown",
         "- `06_supervised_dae_pipeline.png/.svg`: clean method diagram",
-        "- `07_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides",
+        "- `07_unsupervised_dae_pipeline.png/.svg`: unsupervised method diagram with downstream classifier branch",
+        "- `08_unsupervised_vs_supervised.png/.svg`: comparison diagram for backup / explanation slides",
         "",
         "## Source results",
         "",
@@ -465,7 +543,8 @@ def main() -> None:
 
     draw_training_curve("05_best_run_training_curve")
     draw_pipeline_diagram("06_supervised_dae_pipeline")
-    draw_learning_modes_diagram("07_unsupervised_vs_supervised")
+    draw_unsupervised_pipeline_diagram("07_unsupervised_dae_pipeline")
+    draw_learning_modes_diagram("08_unsupervised_vs_supervised")
     build_readme()
 
 
