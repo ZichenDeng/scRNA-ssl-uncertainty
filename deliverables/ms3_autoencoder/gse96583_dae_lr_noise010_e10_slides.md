@@ -8,10 +8,10 @@
 
 ## Slide 2: Setup
 
-- Input dataset source: `lite_fallback_cached`
-- Input dataset path: `/home/zichende/projects/scRNA-ssl-uncertainty/data/processed/GSE96583_combined_shared_qc_singlets_lite.h5ad`
+- Input dataset source: `full_ms2_processed`
+- Input dataset path: `/Users/taosiheng/Desktop/CS1090B/scRNA-ssl-uncertainty/data/processed/GSE96583_combined_shared_qc_singlets.h5ad`
 - Input dimension: `14222` genes
-- Split sizes: train `24977`, val `5352`, test `5353`
+- Split sizes: train `24649`, val `5282`, test `5283`
 - DAE hidden dimensions: `[512, 128]`
 - Latent dimension: `32`
 - Noise type / level: `dropout` / `0.1`
@@ -22,27 +22,27 @@
 
 ## Slide 3: Main result
 
-- DAE-32-LR-noise0.10 does not beat PCA-50 yet; test macro-F1 changes by -0.093.
-- Test accuracy delta: `-0.055`
-- PCA-50 test metrics: accuracy `0.922`, macro-F1 `0.858`, balanced accuracy `0.901`
-- DAE-32-LR-noise0.10 test metrics: accuracy `0.868`, macro-F1 `0.764`, balanced accuracy `0.819`
+- DAE-32-LR-noise0.10 does not beat PCA-50 yet; test macro-F1 changes by -0.099.
+- Test accuracy delta: `-0.058`
+- PCA-50 test metrics: accuracy `0.922`, macro-F1 `0.850`, balanced accuracy `0.894`
+- DAE-32-LR-noise0.10 test metrics: accuracy `0.864`, macro-F1 `0.752`, balanced accuracy `0.797`
 - Validation/test macro-F1 stability:
 | representation | val | test | val_test_gap |
 | --- | ---: | ---: | ---: |
-| PCA-50 | 0.842 | 0.858 | 0.016 |
-| DAE-32-LR-noise0.10 | 0.748 | 0.764 | 0.017 |
+| PCA-50 | 0.850 | 0.850 | 0.000 |
+| DAE-32-LR-noise0.10 | 0.760 | 0.752 | 0.009 |
 
 
 ## Slide 4: Class-level story
 
-- Biggest gains: FCGR3A+ Monocytes (+0.008)
-- Biggest drops: Megakaryocytes (-0.519); CD8 T cells (-0.071); Dendritic cells (-0.060)
+- No cell type improved over PCA in this run. Smallest losses: B cells (-0.007); FCGR3A+ Monocytes (-0.012); CD14+ Monocytes (-0.022)
+- Biggest drops: Megakaryocytes (-0.558); CD8 T cells (-0.066); CD4 T cells (-0.046)
 - Use the matching per-class delta figure for this run.
 
 ## Slide 5: Training story
 
-- Best validation total loss: `0.1303`
-- Final restored checkpoint validation total loss: `0.1303`
+- Best validation total loss: `0.1305`
+- Final restored checkpoint validation total loss: `0.1305`
 - Use the matching training-curve figure for this run.
 
 ## Slide 6: Caveat / next step

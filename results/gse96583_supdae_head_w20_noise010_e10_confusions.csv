@@ -1,257 +1,257 @@
 true_label,predicted_label,count,representation,split
-B cells,B cells,537,PCA-50,val
+B cells,B cells,532,PCA-50,val
 CD14+ Monocytes,B cells,0,PCA-50,val
 CD4 T cells,B cells,6,PCA-50,val
-CD8 T cells,B cells,2,PCA-50,val
-Dendritic cells,B cells,8,PCA-50,val
-FCGR3A+ Monocytes,B cells,1,PCA-50,val
-Megakaryocytes,B cells,2,PCA-50,val
+CD8 T cells,B cells,1,PCA-50,val
+Dendritic cells,B cells,3,PCA-50,val
+FCGR3A+ Monocytes,B cells,0,PCA-50,val
+Megakaryocytes,B cells,1,PCA-50,val
 NK cells,B cells,0,PCA-50,val
-B cells,CD14+ Monocytes,1,PCA-50,val
-CD14+ Monocytes,CD14+ Monocytes,967,PCA-50,val
+B cells,CD14+ Monocytes,0,PCA-50,val
+CD14+ Monocytes,CD14+ Monocytes,963,PCA-50,val
 CD4 T cells,CD14+ Monocytes,0,PCA-50,val
 CD8 T cells,CD14+ Monocytes,0,PCA-50,val
 Dendritic cells,CD14+ Monocytes,1,PCA-50,val
-FCGR3A+ Monocytes,CD14+ Monocytes,36,PCA-50,val
-Megakaryocytes,CD14+ Monocytes,1,PCA-50,val
+FCGR3A+ Monocytes,CD14+ Monocytes,20,PCA-50,val
+Megakaryocytes,CD14+ Monocytes,0,PCA-50,val
 NK cells,CD14+ Monocytes,0,PCA-50,val
-B cells,CD4 T cells,5,PCA-50,val
-CD14+ Monocytes,CD4 T cells,1,PCA-50,val
-CD4 T cells,CD4 T cells,2158,PCA-50,val
-CD8 T cells,CD4 T cells,31,PCA-50,val
-Dendritic cells,CD4 T cells,0,PCA-50,val
-FCGR3A+ Monocytes,CD4 T cells,4,PCA-50,val
+B cells,CD4 T cells,4,PCA-50,val
+CD14+ Monocytes,CD4 T cells,2,PCA-50,val
+CD4 T cells,CD4 T cells,2142,PCA-50,val
+CD8 T cells,CD4 T cells,29,PCA-50,val
+Dendritic cells,CD4 T cells,1,PCA-50,val
+FCGR3A+ Monocytes,CD4 T cells,3,PCA-50,val
 Megakaryocytes,CD4 T cells,2,PCA-50,val
-NK cells,CD4 T cells,1,PCA-50,val
-B cells,CD8 T cells,0,PCA-50,val
+NK cells,CD4 T cells,2,PCA-50,val
+B cells,CD8 T cells,1,PCA-50,val
 CD14+ Monocytes,CD8 T cells,0,PCA-50,val
-CD4 T cells,CD8 T cells,88,PCA-50,val
-CD8 T cells,CD8 T cells,428,PCA-50,val
-Dendritic cells,CD8 T cells,0,PCA-50,val
+CD4 T cells,CD8 T cells,89,PCA-50,val
+CD8 T cells,CD8 T cells,430,PCA-50,val
+Dendritic cells,CD8 T cells,1,PCA-50,val
 FCGR3A+ Monocytes,CD8 T cells,0,PCA-50,val
 Megakaryocytes,CD8 T cells,0,PCA-50,val
-NK cells,CD8 T cells,55,PCA-50,val
-B cells,Dendritic cells,14,PCA-50,val
-CD14+ Monocytes,Dendritic cells,12,PCA-50,val
-CD4 T cells,Dendritic cells,0,PCA-50,val
+NK cells,CD8 T cells,45,PCA-50,val
+B cells,Dendritic cells,10,PCA-50,val
+CD14+ Monocytes,Dendritic cells,17,PCA-50,val
+CD4 T cells,Dendritic cells,2,PCA-50,val
 CD8 T cells,Dendritic cells,1,PCA-50,val
-Dendritic cells,Dendritic cells,77,PCA-50,val
-FCGR3A+ Monocytes,Dendritic cells,3,PCA-50,val
-Megakaryocytes,Dendritic cells,0,PCA-50,val
+Dendritic cells,Dendritic cells,74,PCA-50,val
+FCGR3A+ Monocytes,Dendritic cells,8,PCA-50,val
+Megakaryocytes,Dendritic cells,2,PCA-50,val
 NK cells,Dendritic cells,0,PCA-50,val
-B cells,FCGR3A+ Monocytes,1,PCA-50,val
-CD14+ Monocytes,FCGR3A+ Monocytes,83,PCA-50,val
-CD4 T cells,FCGR3A+ Monocytes,4,PCA-50,val
+B cells,FCGR3A+ Monocytes,3,PCA-50,val
+CD14+ Monocytes,FCGR3A+ Monocytes,58,PCA-50,val
+CD4 T cells,FCGR3A+ Monocytes,0,PCA-50,val
 CD8 T cells,FCGR3A+ Monocytes,0,PCA-50,val
-Dendritic cells,FCGR3A+ Monocytes,5,PCA-50,val
-FCGR3A+ Monocytes,FCGR3A+ Monocytes,275,PCA-50,val
+Dendritic cells,FCGR3A+ Monocytes,2,PCA-50,val
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,277,PCA-50,val
 Megakaryocytes,FCGR3A+ Monocytes,0,PCA-50,val
-NK cells,FCGR3A+ Monocytes,1,PCA-50,val
-B cells,Megakaryocytes,3,PCA-50,val
-CD14+ Monocytes,Megakaryocytes,2,PCA-50,val
-CD4 T cells,Megakaryocytes,23,PCA-50,val
-CD8 T cells,Megakaryocytes,2,PCA-50,val
-Dendritic cells,Megakaryocytes,1,PCA-50,val
-FCGR3A+ Monocytes,Megakaryocytes,2,PCA-50,val
+NK cells,FCGR3A+ Monocytes,0,PCA-50,val
+B cells,Megakaryocytes,2,PCA-50,val
+CD14+ Monocytes,Megakaryocytes,1,PCA-50,val
+CD4 T cells,Megakaryocytes,33,PCA-50,val
+CD8 T cells,Megakaryocytes,1,PCA-50,val
+Dendritic cells,Megakaryocytes,0,PCA-50,val
+FCGR3A+ Monocytes,Megakaryocytes,1,PCA-50,val
 Megakaryocytes,Megakaryocytes,32,PCA-50,val
-NK cells,Megakaryocytes,1,PCA-50,val
+NK cells,Megakaryocytes,0,PCA-50,val
 B cells,NK cells,0,PCA-50,val
 CD14+ Monocytes,NK cells,0,PCA-50,val
-CD4 T cells,NK cells,0,PCA-50,val
-CD8 T cells,NK cells,42,PCA-50,val
+CD4 T cells,NK cells,2,PCA-50,val
+CD8 T cells,NK cells,38,PCA-50,val
 Dendritic cells,NK cells,0,PCA-50,val
-FCGR3A+ Monocytes,NK cells,0,PCA-50,val
-Megakaryocytes,NK cells,1,PCA-50,val
-NK cells,NK cells,432,PCA-50,val
-B cells,B cells,540,PCA-50,test
+FCGR3A+ Monocytes,NK cells,2,PCA-50,val
+Megakaryocytes,NK cells,0,PCA-50,val
+NK cells,NK cells,438,PCA-50,val
+B cells,B cells,527,PCA-50,test
 CD14+ Monocytes,B cells,0,PCA-50,test
-CD4 T cells,B cells,4,PCA-50,test
-CD8 T cells,B cells,0,PCA-50,test
+CD4 T cells,B cells,7,PCA-50,test
+CD8 T cells,B cells,2,PCA-50,test
 Dendritic cells,B cells,5,PCA-50,test
-FCGR3A+ Monocytes,B cells,3,PCA-50,test
-Megakaryocytes,B cells,0,PCA-50,test
+FCGR3A+ Monocytes,B cells,2,PCA-50,test
+Megakaryocytes,B cells,2,PCA-50,test
 NK cells,B cells,0,PCA-50,test
 B cells,CD14+ Monocytes,0,PCA-50,test
-CD14+ Monocytes,CD14+ Monocytes,981,PCA-50,test
+CD14+ Monocytes,CD14+ Monocytes,967,PCA-50,test
 CD4 T cells,CD14+ Monocytes,0,PCA-50,test
 CD8 T cells,CD14+ Monocytes,0,PCA-50,test
-Dendritic cells,CD14+ Monocytes,4,PCA-50,test
-FCGR3A+ Monocytes,CD14+ Monocytes,41,PCA-50,test
+Dendritic cells,CD14+ Monocytes,1,PCA-50,test
+FCGR3A+ Monocytes,CD14+ Monocytes,30,PCA-50,test
 Megakaryocytes,CD14+ Monocytes,0,PCA-50,test
 NK cells,CD14+ Monocytes,0,PCA-50,test
-B cells,CD4 T cells,12,PCA-50,test
+B cells,CD4 T cells,7,PCA-50,test
 CD14+ Monocytes,CD4 T cells,0,PCA-50,test
-CD4 T cells,CD4 T cells,2149,PCA-50,test
-CD8 T cells,CD4 T cells,33,PCA-50,test
-Dendritic cells,CD4 T cells,2,PCA-50,test
-FCGR3A+ Monocytes,CD4 T cells,2,PCA-50,test
-Megakaryocytes,CD4 T cells,3,PCA-50,test
-NK cells,CD4 T cells,0,PCA-50,test
-B cells,CD8 T cells,1,PCA-50,test
+CD4 T cells,CD4 T cells,2146,PCA-50,test
+CD8 T cells,CD4 T cells,34,PCA-50,test
+Dendritic cells,CD4 T cells,1,PCA-50,test
+FCGR3A+ Monocytes,CD4 T cells,5,PCA-50,test
+Megakaryocytes,CD4 T cells,2,PCA-50,test
+NK cells,CD4 T cells,1,PCA-50,test
+B cells,CD8 T cells,0,PCA-50,test
 CD14+ Monocytes,CD8 T cells,0,PCA-50,test
-CD4 T cells,CD8 T cells,91,PCA-50,test
-CD8 T cells,CD8 T cells,429,PCA-50,test
+CD4 T cells,CD8 T cells,95,PCA-50,test
+CD8 T cells,CD8 T cells,434,PCA-50,test
 Dendritic cells,CD8 T cells,0,PCA-50,test
 FCGR3A+ Monocytes,CD8 T cells,0,PCA-50,test
 Megakaryocytes,CD8 T cells,0,PCA-50,test
-NK cells,CD8 T cells,37,PCA-50,test
-B cells,Dendritic cells,5,PCA-50,test
-CD14+ Monocytes,Dendritic cells,14,PCA-50,test
-CD4 T cells,Dendritic cells,2,PCA-50,test
+NK cells,CD8 T cells,55,PCA-50,test
+B cells,Dendritic cells,15,PCA-50,test
+CD14+ Monocytes,Dendritic cells,11,PCA-50,test
+CD4 T cells,Dendritic cells,0,PCA-50,test
 CD8 T cells,Dendritic cells,0,PCA-50,test
-Dendritic cells,Dendritic cells,81,PCA-50,test
-FCGR3A+ Monocytes,Dendritic cells,2,PCA-50,test
+Dendritic cells,Dendritic cells,70,PCA-50,test
+FCGR3A+ Monocytes,Dendritic cells,4,PCA-50,test
 Megakaryocytes,Dendritic cells,0,PCA-50,test
-NK cells,Dendritic cells,0,PCA-50,test
-B cells,FCGR3A+ Monocytes,1,PCA-50,test
-CD14+ Monocytes,FCGR3A+ Monocytes,68,PCA-50,test
-CD4 T cells,FCGR3A+ Monocytes,4,PCA-50,test
-CD8 T cells,FCGR3A+ Monocytes,1,PCA-50,test
-Dendritic cells,FCGR3A+ Monocytes,1,PCA-50,test
-FCGR3A+ Monocytes,FCGR3A+ Monocytes,271,PCA-50,test
-Megakaryocytes,FCGR3A+ Monocytes,0,PCA-50,test
+NK cells,Dendritic cells,1,PCA-50,test
+B cells,FCGR3A+ Monocytes,3,PCA-50,test
+CD14+ Monocytes,FCGR3A+ Monocytes,61,PCA-50,test
+CD4 T cells,FCGR3A+ Monocytes,3,PCA-50,test
+CD8 T cells,FCGR3A+ Monocytes,0,PCA-50,test
+Dendritic cells,FCGR3A+ Monocytes,4,PCA-50,test
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,266,PCA-50,test
+Megakaryocytes,FCGR3A+ Monocytes,1,PCA-50,test
 NK cells,FCGR3A+ Monocytes,0,PCA-50,test
-B cells,Megakaryocytes,2,PCA-50,test
+B cells,Megakaryocytes,1,PCA-50,test
 CD14+ Monocytes,Megakaryocytes,2,PCA-50,test
-CD4 T cells,Megakaryocytes,28,PCA-50,test
+CD4 T cells,Megakaryocytes,23,PCA-50,test
 CD8 T cells,Megakaryocytes,1,PCA-50,test
-Dendritic cells,Megakaryocytes,0,PCA-50,test
-FCGR3A+ Monocytes,Megakaryocytes,1,PCA-50,test
-Megakaryocytes,Megakaryocytes,33,PCA-50,test
+Dendritic cells,Megakaryocytes,1,PCA-50,test
+FCGR3A+ Monocytes,Megakaryocytes,3,PCA-50,test
+Megakaryocytes,Megakaryocytes,32,PCA-50,test
 NK cells,Megakaryocytes,0,PCA-50,test
 B cells,NK cells,0,PCA-50,test
 CD14+ Monocytes,NK cells,0,PCA-50,test
 CD4 T cells,NK cells,1,PCA-50,test
-CD8 T cells,NK cells,42,PCA-50,test
+CD8 T cells,NK cells,29,PCA-50,test
 Dendritic cells,NK cells,0,PCA-50,test
-FCGR3A+ Monocytes,NK cells,1,PCA-50,test
-Megakaryocytes,NK cells,1,PCA-50,test
-NK cells,NK cells,454,PCA-50,test
-B cells,B cells,549,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,NK cells,0,PCA-50,test
+Megakaryocytes,NK cells,0,PCA-50,test
+NK cells,NK cells,428,PCA-50,test
+B cells,B cells,546,SupDAE-32-head-w2.0-noise0.10,val
 CD14+ Monocytes,B cells,0,SupDAE-32-head-w2.0-noise0.10,val
-CD4 T cells,B cells,1,SupDAE-32-head-w2.0-noise0.10,val
-CD8 T cells,B cells,3,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,B cells,11,SupDAE-32-head-w2.0-noise0.10,val
+CD4 T cells,B cells,2,SupDAE-32-head-w2.0-noise0.10,val
+CD8 T cells,B cells,1,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,B cells,6,SupDAE-32-head-w2.0-noise0.10,val
 FCGR3A+ Monocytes,B cells,1,SupDAE-32-head-w2.0-noise0.10,val
-Megakaryocytes,B cells,7,SupDAE-32-head-w2.0-noise0.10,val
-NK cells,B cells,0,SupDAE-32-head-w2.0-noise0.10,val
-B cells,CD14+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,val
-CD14+ Monocytes,CD14+ Monocytes,1053,SupDAE-32-head-w2.0-noise0.10,val
-CD4 T cells,CD14+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,val
+Megakaryocytes,B cells,4,SupDAE-32-head-w2.0-noise0.10,val
+NK cells,B cells,1,SupDAE-32-head-w2.0-noise0.10,val
+B cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
+CD14+ Monocytes,CD14+ Monocytes,1023,SupDAE-32-head-w2.0-noise0.10,val
+CD4 T cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 CD8 T cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,CD14+ Monocytes,11,SupDAE-32-head-w2.0-noise0.10,val
-FCGR3A+ Monocytes,CD14+ Monocytes,60,SupDAE-32-head-w2.0-noise0.10,val
-Megakaryocytes,CD14+ Monocytes,6,SupDAE-32-head-w2.0-noise0.10,val
-NK cells,CD14+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,val
-B cells,CD4 T cells,9,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,CD14+ Monocytes,10,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,CD14+ Monocytes,39,SupDAE-32-head-w2.0-noise0.10,val
+Megakaryocytes,CD14+ Monocytes,4,SupDAE-32-head-w2.0-noise0.10,val
+NK cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
+B cells,CD4 T cells,5,SupDAE-32-head-w2.0-noise0.10,val
 CD14+ Monocytes,CD4 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
-CD4 T cells,CD4 T cells,2259,SupDAE-32-head-w2.0-noise0.10,val
-CD8 T cells,CD4 T cells,96,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,CD4 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
+CD4 T cells,CD4 T cells,2190,SupDAE-32-head-w2.0-noise0.10,val
+CD8 T cells,CD4 T cells,40,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,CD4 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
 FCGR3A+ Monocytes,CD4 T cells,3,SupDAE-32-head-w2.0-noise0.10,val
-Megakaryocytes,CD4 T cells,13,SupDAE-32-head-w2.0-noise0.10,val
-NK cells,CD4 T cells,3,SupDAE-32-head-w2.0-noise0.10,val
-B cells,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
+Megakaryocytes,CD4 T cells,11,SupDAE-32-head-w2.0-noise0.10,val
+NK cells,CD4 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
+B cells,CD8 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
 CD14+ Monocytes,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
-CD4 T cells,CD8 T cells,17,SupDAE-32-head-w2.0-noise0.10,val
-CD8 T cells,CD8 T cells,388,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
-FCGR3A+ Monocytes,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
+CD4 T cells,CD8 T cells,81,SupDAE-32-head-w2.0-noise0.10,val
+CD8 T cells,CD8 T cells,433,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,CD8 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,CD8 T cells,1,SupDAE-32-head-w2.0-noise0.10,val
 Megakaryocytes,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,val
-NK cells,CD8 T cells,62,SupDAE-32-head-w2.0-noise0.10,val
-B cells,Dendritic cells,1,SupDAE-32-head-w2.0-noise0.10,val
-CD14+ Monocytes,Dendritic cells,2,SupDAE-32-head-w2.0-noise0.10,val
+NK cells,CD8 T cells,64,SupDAE-32-head-w2.0-noise0.10,val
+B cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,val
+CD14+ Monocytes,Dendritic cells,1,SupDAE-32-head-w2.0-noise0.10,val
 CD4 T cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,val
-CD8 T cells,Dendritic cells,1,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,Dendritic cells,69,SupDAE-32-head-w2.0-noise0.10,val
-FCGR3A+ Monocytes,Dendritic cells,3,SupDAE-32-head-w2.0-noise0.10,val
+CD8 T cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,Dendritic cells,62,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,Dendritic cells,4,SupDAE-32-head-w2.0-noise0.10,val
 Megakaryocytes,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,val
 NK cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,val
 B cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-CD14+ Monocytes,FCGR3A+ Monocytes,9,SupDAE-32-head-w2.0-noise0.10,val
+CD14+ Monocytes,FCGR3A+ Monocytes,16,SupDAE-32-head-w2.0-noise0.10,val
 CD4 T cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 CD8 T cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-FCGR3A+ Monocytes,FCGR3A+ Monocytes,254,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,FCGR3A+ Monocytes,2,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,262,SupDAE-32-head-w2.0-noise0.10,val
 Megakaryocytes,FCGR3A+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,val
 NK cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-B cells,Megakaryocytes,1,SupDAE-32-head-w2.0-noise0.10,val
+B cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 CD14+ Monocytes,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 CD4 T cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 CD8 T cells,Megakaryocytes,1,SupDAE-32-head-w2.0-noise0.10,val
-Dendritic cells,Megakaryocytes,1,SupDAE-32-head-w2.0-noise0.10,val
+Dendritic cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 FCGR3A+ Monocytes,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
-Megakaryocytes,Megakaryocytes,10,SupDAE-32-head-w2.0-noise0.10,val
+Megakaryocytes,Megakaryocytes,16,SupDAE-32-head-w2.0-noise0.10,val
 NK cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,val
 B cells,NK cells,0,SupDAE-32-head-w2.0-noise0.10,val
 CD14+ Monocytes,NK cells,0,SupDAE-32-head-w2.0-noise0.10,val
 CD4 T cells,NK cells,1,SupDAE-32-head-w2.0-noise0.10,val
-CD8 T cells,NK cells,17,SupDAE-32-head-w2.0-noise0.10,val
+CD8 T cells,NK cells,25,SupDAE-32-head-w2.0-noise0.10,val
 Dendritic cells,NK cells,0,SupDAE-32-head-w2.0-noise0.10,val
-FCGR3A+ Monocytes,NK cells,0,SupDAE-32-head-w2.0-noise0.10,val
+FCGR3A+ Monocytes,NK cells,1,SupDAE-32-head-w2.0-noise0.10,val
 Megakaryocytes,NK cells,1,SupDAE-32-head-w2.0-noise0.10,val
-NK cells,NK cells,424,SupDAE-32-head-w2.0-noise0.10,val
-B cells,B cells,547,SupDAE-32-head-w2.0-noise0.10,test
+NK cells,NK cells,419,SupDAE-32-head-w2.0-noise0.10,val
+B cells,B cells,543,SupDAE-32-head-w2.0-noise0.10,test
 CD14+ Monocytes,B cells,0,SupDAE-32-head-w2.0-noise0.10,test
-CD4 T cells,B cells,1,SupDAE-32-head-w2.0-noise0.10,test
+CD4 T cells,B cells,3,SupDAE-32-head-w2.0-noise0.10,test
 CD8 T cells,B cells,1,SupDAE-32-head-w2.0-noise0.10,test
 Dendritic cells,B cells,6,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,B cells,5,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,B cells,5,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,B cells,3,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,B cells,4,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,B cells,0,SupDAE-32-head-w2.0-noise0.10,test
 B cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-CD14+ Monocytes,CD14+ Monocytes,1056,SupDAE-32-head-w2.0-noise0.10,test
-CD4 T cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
+CD14+ Monocytes,CD14+ Monocytes,1014,SupDAE-32-head-w2.0-noise0.10,test
+CD4 T cells,CD14+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,test
 CD8 T cells,CD14+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-Dendritic cells,CD14+ Monocytes,13,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,CD14+ Monocytes,62,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,CD14+ Monocytes,3,SupDAE-32-head-w2.0-noise0.10,test
+Dendritic cells,CD14+ Monocytes,15,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,CD14+ Monocytes,38,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,CD14+ Monocytes,2,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,CD14+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,test
-B cells,CD4 T cells,13,SupDAE-32-head-w2.0-noise0.10,test
+B cells,CD4 T cells,10,SupDAE-32-head-w2.0-noise0.10,test
 CD14+ Monocytes,CD4 T cells,0,SupDAE-32-head-w2.0-noise0.10,test
-CD4 T cells,CD4 T cells,2265,SupDAE-32-head-w2.0-noise0.10,test
-CD8 T cells,CD4 T cells,95,SupDAE-32-head-w2.0-noise0.10,test
-Dendritic cells,CD4 T cells,2,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,CD4 T cells,1,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,CD4 T cells,9,SupDAE-32-head-w2.0-noise0.10,test
+CD4 T cells,CD4 T cells,2177,SupDAE-32-head-w2.0-noise0.10,test
+CD8 T cells,CD4 T cells,50,SupDAE-32-head-w2.0-noise0.10,test
+Dendritic cells,CD4 T cells,3,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,CD4 T cells,3,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,CD4 T cells,10,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,CD4 T cells,1,SupDAE-32-head-w2.0-noise0.10,test
-B cells,CD8 T cells,1,SupDAE-32-head-w2.0-noise0.10,test
+B cells,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,test
 CD14+ Monocytes,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,test
-CD4 T cells,CD8 T cells,13,SupDAE-32-head-w2.0-noise0.10,test
-CD8 T cells,CD8 T cells,397,SupDAE-32-head-w2.0-noise0.10,test
+CD4 T cells,CD8 T cells,94,SupDAE-32-head-w2.0-noise0.10,test
+CD8 T cells,CD8 T cells,428,SupDAE-32-head-w2.0-noise0.10,test
 Dendritic cells,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,CD8 T cells,1,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,CD8 T cells,2,SupDAE-32-head-w2.0-noise0.10,test
 Megakaryocytes,CD8 T cells,0,SupDAE-32-head-w2.0-noise0.10,test
-NK cells,CD8 T cells,57,SupDAE-32-head-w2.0-noise0.10,test
+NK cells,CD8 T cells,53,SupDAE-32-head-w2.0-noise0.10,test
 B cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
-CD14+ Monocytes,Dendritic cells,2,SupDAE-32-head-w2.0-noise0.10,test
+CD14+ Monocytes,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
 CD4 T cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
 CD8 T cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
-Dendritic cells,Dendritic cells,69,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
+Dendritic cells,Dendritic cells,57,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,Dendritic cells,1,SupDAE-32-head-w2.0-noise0.10,test
 Megakaryocytes,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,Dendritic cells,0,SupDAE-32-head-w2.0-noise0.10,test
 B cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-CD14+ Monocytes,FCGR3A+ Monocytes,7,SupDAE-32-head-w2.0-noise0.10,test
+CD14+ Monocytes,FCGR3A+ Monocytes,27,SupDAE-32-head-w2.0-noise0.10,test
 CD4 T cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 CD8 T cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-Dendritic cells,FCGR3A+ Monocytes,3,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,FCGR3A+ Monocytes,251,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-NK cells,FCGR3A+ Monocytes,2,SupDAE-32-head-w2.0-noise0.10,test
+Dendritic cells,FCGR3A+ Monocytes,1,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,FCGR3A+ Monocytes,262,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,FCGR3A+ Monocytes,3,SupDAE-32-head-w2.0-noise0.10,test
+NK cells,FCGR3A+ Monocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 B cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 CD14+ Monocytes,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 CD4 T cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-CD8 T cells,Megakaryocytes,1,SupDAE-32-head-w2.0-noise0.10,test
+CD8 T cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 Dendritic cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,Megakaryocytes,19,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,Megakaryocytes,1,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,Megakaryocytes,18,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,Megakaryocytes,0,SupDAE-32-head-w2.0-noise0.10,test
 B cells,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
 CD14+ Monocytes,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
 CD4 T cells,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
-CD8 T cells,NK cells,12,SupDAE-32-head-w2.0-noise0.10,test
+CD8 T cells,NK cells,21,SupDAE-32-head-w2.0-noise0.10,test
 Dendritic cells,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
-FCGR3A+ Monocytes,NK cells,1,SupDAE-32-head-w2.0-noise0.10,test
-Megakaryocytes,NK cells,1,SupDAE-32-head-w2.0-noise0.10,test
+FCGR3A+ Monocytes,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
+Megakaryocytes,NK cells,0,SupDAE-32-head-w2.0-noise0.10,test
 NK cells,NK cells,430,SupDAE-32-head-w2.0-noise0.10,test
