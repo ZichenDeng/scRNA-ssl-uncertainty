@@ -1,0 +1,83 @@
+% Person 2 Overleaf fragment for Group 13 final report.
+% Add these packages near the existing package list if they are not already present:
+% \usepackage{graphicx}
+% \usepackage{array}
+
+% Images to upload to Overleaf, keeping this relative folder structure:
+% figures/class_distribution.png
+% figures/embedding_after_harmony_fixed.png
+% figures/batch_effect_metrics.png
+% Optional if space allows: figures/qc_overview_fixed.png
+
+\section{Data and Exploratory Data Analysis}
+
+We used the public GSE96583 peripheral blood mononuclear cell (PBMC) single-cell RNA-seq dataset as our primary benchmark. The dataset contains five count matrices: three batch-1 samples (A, B, and C) and two batch-2 samples corresponding to control and IFN-$\beta$ stimulated conditions. The unit of observation is one PBMC cell, the input is a processed gene-expression profile, and the target is one of eight annotated PBMC cell types.
+
+After quality control, singlet filtering, residual doublet-like cell removal, and shared-gene alignment, the final analysis object contained 35,214 cells in a shared 14,222-gene space. Batch 1 contributed 11,308 cells, while batch 2 contributed 23,906 cells, split into 12,097 control cells and 11,809 stimulated cells. We normalized each batch separately to a total count of $10^4$, applied a log transform, selected highly variable genes within each batch, and used the union of 3,656 highly variable genes for PCA, Harmony visualization, and downstream model inputs.
+
+\begin{table}[t]
+\centering
+\caption{Final processed GSE96583 object used for modeling.}
+\label{tab:processed-object}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Cells after final QC & 35,214 \\
+Shared genes after QC and singlet filtering & 14,222 \\
+Union highly variable genes & 3,656 \\
+Batch 1 cells & 11,308 \\
+Batch 2 cells & 23,906 \\
+Control cells in batch 2 & 12,097 \\
+Stimulated cells in batch 2 & 11,809 \\
+Cell-type classes & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three EDA findings directly shaped the modeling design. First, the class distribution was highly imbalanced: CD4 T cells represented 43.1\% of cells, whereas dendritic cells and megakaryocytes represented only 1.55\% and 0.70\%, respectively. This motivated macro-F1, balanced accuracy, and per-class F1 rather than accuracy alone. Second, the dataset contained strong batch structure before correction. In the first 20 PCA dimensions, same-batch neighbor rate was 0.995 before Harmony and decreased to 0.776 after Harmony, while same-cell-type neighbor rate remained stable at 0.909 before and after correction. This suggests that batch correction reduced technical separation without destroying the main cell-type structure. Third, the batch-2 control and stimulated groups had similar total cell counts but different cell-type composition, so condition shift was treated as a separate robustness concern rather than as simple random noise.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.72\linewidth]{figures/class_distribution.png}
+\caption{Class imbalance after preprocessing. Common lymphocyte and monocyte classes dominate the dataset, while dendritic cells and megakaryocytes form a long tail.}
+\label{fig:class-distribution}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{figures/embedding_after_harmony_fixed.png}
+\caption{Harmony-corrected embedding colored by batch and cell type. The visualization shows improved batch mixing while preserving interpretable PBMC cell-type neighborhoods.}
+\label{fig:harmony-embedding}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/batch_effect_metrics.png}
+\caption{Batch-effect metrics before and after Harmony. Batch and condition structure decrease after correction, while cell-type neighborhood preservation remains nearly unchanged.}
+\label{fig:batch-effect-metrics}
+\end{figure}
+
+\subsection{Preprocessing and data split}
+
+The preprocessing pipeline used one fixed path for all later models. We loaded the raw GEO matrices, attached barcode-level metadata, filtered low-quality cells and low-support genes, kept metadata singlets, removed additional doublet-like outliers using Scrublet and high-count/high-gene tail filtering, restricted the two batches to shared genes, normalized counts per batch, applied a log transform, and created a common highly-variable-gene representation. This produced the final shared AnnData object used by both the PCA baselines and the autoencoder summaries.
+
+For the main model comparison, we used a fixed stratified 70/15/15 train/validation/test split with random seed 1090. This produced 24,649 training cells, 5,282 validation cells, and 5,283 test cells. The same split was used for the PCA baseline models and all denoising-autoencoder result files, which makes the model comparison fair.
+
+However, this fixed split is not itself a true distribution-shift evaluation because batches and conditions are mixed across train, validation, and test cells. To address that limitation, we added explicit shift-aware stress tests using PCA fit only on the training source cells and logistic regression evaluated on held-out target groups. In these tests, batch transfer was harder than the same-split comparison: macro-F1 was 0.734 for batch1$\rightarrow$batch2 and 0.793 for batch2$\rightarrow$batch1. Condition transfer inside batch 2 showed a similar asymmetry, with macro-F1 of 0.757 for control$\rightarrow$stimulated and 0.814 for stimulated$\rightarrow$control. We therefore report same-split results as controlled model comparisons, and use the holdout tests to describe robustness under batch or condition shift.
+
+\begin{table}[t]
+\centering
+\caption{Shift-aware PCA + logistic-regression stress tests. PCA was fit only on source training cells before evaluation on the held-out target group.}
+\label{tab:shift-stress-tests}
+\begin{tabular}{lrrrr}
+\toprule
+Holdout task & Test cells & Accuracy & Balanced acc. & Macro-F1 \\
+\midrule
+Batch1$\rightarrow$Batch2 & 23,906 & 0.845 & 0.800 & 0.734 \\
+Batch2$\rightarrow$Batch1 & 11,308 & 0.899 & 0.897 & 0.793 \\
+Control$\rightarrow$Stimulated & 11,809 & 0.844 & 0.807 & 0.757 \\
+Stimulated$\rightarrow$Control & 12,097 & 0.903 & 0.875 & 0.814 \\
+\bottomrule
+\end{tabular}
+\end{table}

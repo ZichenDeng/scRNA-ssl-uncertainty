@@ -1,0 +1,5 @@
+shift_task,train_cells,val_cells,shift_test_cells
+batch1_to_batch2,9611,1697,23906
+batch2_to_batch1,20320,3586,11308
+ctrl_to_stim,10282,1815,11809
+stim_to_ctrl,10037,1772,12097

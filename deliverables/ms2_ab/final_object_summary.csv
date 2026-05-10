@@ -1,0 +1,10 @@
+quantity,value
+final_combined_cells,35214
+final_shared_genes,14222
+shared_genes_after_qc_singlets,14222
+highly_variable_gene_union,3656
+batch1_cells,11308
+batch2_cells,23906
+ctrl_cells,12097
+stim_cells,11809
+cell_type_classes,8
