@@ -1,50 +1,35 @@
 # scRNA SSL Uncertainty
 
-This project studies whether a simple self-supervised embedding model can improve PBMC cell-type prediction and uncertainty estimation under dataset shift relative to PCA.
+This project studies PBMC cell-type classification under dataset shift in `GSE96583`, with a final MS4 comparison between simple PCA baselines and a supervised denoising autoencoder.
 
-## Current Scope
+## Canonical MS4 assets
 
-- Primary benchmark: `GSE96583`
-- Main comparison: PCA versus denoising autoencoder
-- Reliability analysis: uncertainty under batch and condition shift
-- Immediate benchmark: cross-batch transfer inside `GSE96583`
-- Optional side experiment: transfer into `GSE115189` using pseudo-labels
+Use these committed files as the source of truth for the final writeup and slides:
 
-## Current Status
+- `deliverables/ms2_ab/shift_pca_lr_metrics.csv`
+- `deliverables/ms2_ab/shift_split_summary.csv`
+- `deliverables/ms2_ab/ms4_primary_shift_summary.csv`
+- `deliverables/ms2_ab/ms4_condition_shift_summary.csv`
+- `deliverables/ms2_ab/ms4_final_ae_uncertainty_summary.csv`
+- `deliverables/ms2_ab/ms4_model_selection_table.csv`
+- `deliverables/ms2_ab/ms4_final_summary.md`
+- `deliverables/ms2_ab/figures/ms4_shift_benchmark_by_direction.png`
+- `deliverables/ms2_ab/figures/ms4_best_supdae_training_curves.png`
+- `deliverables/ms2_ab/figures/ms4_best_supdae_vs_pca_per_class_delta.png`
+- `deliverables/ms2_ab/figures/ms4_uncertainty_summary.png`
+- `deliverables/ms4_final.ipynb`
+- `deliverables/ms4_overleaf_person2_sections.tex`
 
-- Proposal drafted in `PROPOSAL.md`
-- Project plan written in `PROJECT_PLAN.md`
-- Python 3.11 project environment available at `.conda-env`
-- GEO datasets downloaded and extracted in `data/raw`
-- First-pass processed `.h5ad` files created in `data/processed`
-- GEO metadata attached to `GSE96583` processed files
-- Singlet-only labeled `GSE96583` benchmark files created
-- First `PCA + logistic regression` cross-batch baseline completed
-- `GSE115189` retained only as an optional pseudo-labeled side dataset
+## Final MS4 story
 
-## Key Files
+- Single benchmark dataset: `GSE96583`
+- Primary evaluation: `batch1 -> batch2` and `batch2 -> batch1`
+- Secondary follow-up: `batch2 ctrl -> stim` and `batch2 stim -> ctrl`
+- Best simple baseline: `PCA-50-LR`
+- Final supervised AE: `SupDAE-32-head-w1-noise0.05`
+- Main conclusion: the supervised AE stays competitive on the harder `batch1 -> batch2` direction, but `PCA-50-LR` remains the strongest overall model on mean macro-F1 across the primary batch-transfer benchmark
+- Main MS4 addition beyond the MS3 sweep: MC-dropout uncertainty on the final supervised AE
 
-- `PROPOSAL.md`: proposal draft for the course project
-- `PROJECT_PLAN.md`: working execution plan
-- `DATA_SOURCES.md`: dataset details and download notes
-- `SESSION_LOG_2026-04-07.md`: running project log
-- `scripts/download_geo_data.sh`: direct GEO download helper
-- `scripts/prepare_pbmc_data.py`: first-pass preprocessing and shared-gene alignment
-- `scripts/annotate_gse96583_metadata.py`: attach GEO-provided labels to `GSE96583`
-- `scripts/run_gse96583_pca_baseline.py`: first cross-batch baseline
-- `data/processed/DATASET_SUMMARY.md`: current processed dataset summary
-- `results/gse96583_pca_baseline_metrics.csv`: baseline metrics table
-- `results/gse96583_pca_baseline_report.txt`: detailed classification report
+## Scope note
 
-## Current Results
-
-Cross-batch `PCA + logistic regression` on labeled `GSE96583` singlets:
-
-- `batch1 -> batch2`: accuracy `0.9190`, macro-F1 `0.8234`
-- `batch2 -> batch1`: accuracy `0.9173`, macro-F1 `0.8752`
-
-## Open Problems
-
-- The self-supervised autoencoder and uncertainty estimation pipeline are not implemented yet.
-- The benchmark still needs a clean cross-condition experiment inside `GSE96583`.
-- `GSE115189` should not be treated as ground-truth-labeled data.
+Random-split experiments, orchestration scripts, scratch `deliverables/final_project/` assets, and raw full-sweep result dumps can still exist in the working tree, but they are not the canonical final evidence for the course submission.

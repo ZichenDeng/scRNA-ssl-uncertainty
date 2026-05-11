@@ -2,82 +2,117 @@
 % Add these packages near the existing package list if they are not already present:
 % \usepackage{graphicx}
 % \usepackage{array}
+% \usepackage{booktabs}
 
 % Images to upload to Overleaf, keeping this relative folder structure:
 % figures/class_distribution.png
 % figures/embedding_after_harmony_fixed.png
-% figures/batch_effect_metrics.png
-% Optional if space allows: figures/qc_overview_fixed.png
+% figures/ms4_shift_benchmark_by_direction.png
+% figures/ms4_best_supdae_training_curves.png
+% figures/ms4_uncertainty_summary.png
 
 \section{Data and Exploratory Data Analysis}
 
-We used the public GSE96583 peripheral blood mononuclear cell (PBMC) single-cell RNA-seq dataset as our primary benchmark. The dataset contains five count matrices: three batch-1 samples (A, B, and C) and two batch-2 samples corresponding to control and IFN-$\beta$ stimulated conditions. The unit of observation is one PBMC cell, the input is a processed gene-expression profile, and the target is one of eight annotated PBMC cell types.
+We used the public GSE96583 peripheral blood mononuclear cell (PBMC) single-cell RNA-seq dataset as the single benchmark for the final project. The final modeling object contains 35,682 cells in a shared 14,222-gene space, with 11,432 cells in batch 1 and 24,250 cells in batch 2. Batch 2 is further divided into 12,261 control cells and 11,989 IFN-$\beta$ stimulated cells. The prediction target is one of eight annotated PBMC cell types.
 
-After quality control, singlet filtering, residual doublet-like cell removal, and shared-gene alignment, the final analysis object contained 35,214 cells in a shared 14,222-gene space. Batch 1 contributed 11,308 cells, while batch 2 contributed 23,906 cells, split into 12,097 control cells and 11,809 stimulated cells. We normalized each batch separately to a total count of $10^4$, applied a log transform, selected highly variable genes within each batch, and used the union of 3,656 highly variable genes for PCA, Harmony visualization, and downstream model inputs.
+The most important exploratory result is that the dataset is meaningfully imbalanced. Common lymphocyte and monocyte classes dominate the object, whereas dendritic cells and megakaryocytes occupy a small long tail. This is why we treat macro-F1, balanced accuracy, and per-class summaries as primary metrics rather than relying on accuracy alone. We also preserve a Harmony-corrected visualization because it confirms that batch structure can be reduced for visualization without destroying the large-scale cell-type geometry.
 
 \begin{table}[t]
 \centering
-\caption{Final processed GSE96583 object used for modeling.}
+\caption{Final processed GSE96583 object used in the MS4 benchmark.}
 \label{tab:processed-object}
 \begin{tabular}{lr}
 \toprule
 Quantity & Value \\
 \midrule
-Cells after final QC & 35,214 \\
+Cells after final QC & 35,682 \\
 Shared genes after QC and singlet filtering & 14,222 \\
-Union highly variable genes & 3,656 \\
-Batch 1 cells & 11,308 \\
-Batch 2 cells & 23,906 \\
-Control cells in batch 2 & 12,097 \\
-Stimulated cells in batch 2 & 11,809 \\
+Batch 1 cells & 11,432 \\
+Batch 2 cells & 24,250 \\
+Control cells in batch 2 & 12,261 \\
+Stimulated cells in batch 2 & 11,989 \\
 Cell-type classes & 8 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Three EDA findings directly shaped the modeling design. First, the class distribution was highly imbalanced: CD4 T cells represented 43.1\% of cells, whereas dendritic cells and megakaryocytes represented only 1.55\% and 0.70\%, respectively. This motivated macro-F1, balanced accuracy, and per-class F1 rather than accuracy alone. Second, the dataset contained strong batch structure before correction. In the first 20 PCA dimensions, same-batch neighbor rate was 0.995 before Harmony and decreased to 0.776 after Harmony, while same-cell-type neighbor rate remained stable at 0.909 before and after correction. This suggests that batch correction reduced technical separation without destroying the main cell-type structure. Third, the batch-2 control and stimulated groups had similar total cell counts but different cell-type composition, so condition shift was treated as a separate robustness concern rather than as simple random noise.
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.72\linewidth]{figures/class_distribution.png}
-\caption{Class imbalance after preprocessing. Common lymphocyte and monocyte classes dominate the dataset, while dendritic cells and megakaryocytes form a long tail.}
+\caption{Class imbalance after preprocessing. Large lymphocyte and monocyte classes dominate the dataset, while dendritic cells and megakaryocytes remain rare.}
 \label{fig:class-distribution}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.96\linewidth]{figures/embedding_after_harmony_fixed.png}
-\caption{Harmony-corrected embedding colored by batch and cell type. The visualization shows improved batch mixing while preserving interpretable PBMC cell-type neighborhoods.}
+\includegraphics[width=0.92\linewidth]{figures/embedding_after_harmony_fixed.png}
+\caption{Harmony-corrected embedding used for the EDA discussion. The plot shows improved batch mixing while preserving interpretable PBMC cell-type neighborhoods.}
 \label{fig:harmony-embedding}
+\end{figure}
+
+\subsection{Shift-aware evaluation protocol}
+
+For MS4, we use shift-aware evaluation rather than treating random train/validation/test splits as the main story. The primary benchmark holds out one batch as the target domain, giving the two transfer directions batch1$\rightarrow$batch2 and batch2$\rightarrow$batch1. We retain PCA + logistic regression and PCA + MLP as simple baselines, then compare them against a single supervised denoising autoencoder that was retained after the shift-aware MS4 comparison. The final supervised AE used for MS4 is \texttt{SupDAE-32-head-w1-noise0.05}.
+
+\begin{table}[t]
+\centering
+\caption{Primary shift benchmark on GSE96583. The final supervised AE is re-evaluated under the same batch-transfer protocol as the PCA baselines.}
+\label{tab:primary-shift-models}
+\begin{tabular}{llrrr}
+\toprule
+Model & Holdout task & Accuracy & Balanced acc. & Macro-F1 \\
+\midrule
+PCA + LR & Batch1$\rightarrow$Batch2 & 0.829 & 0.801 & 0.746 \\
+PCA + LR & Batch2$\rightarrow$Batch1 & 0.931 & 0.915 & 0.901 \\
+PCA + MLP & Batch1$\rightarrow$Batch2 & 0.772 & 0.689 & 0.713 \\
+PCA + MLP & Batch2$\rightarrow$Batch1 & 0.911 & 0.853 & 0.869 \\
+Final SupDAE & Batch1$\rightarrow$Batch2 & 0.900 & 0.750 & 0.750 \\
+Final SupDAE & Batch2$\rightarrow$Batch1 & 0.929 & 0.865 & 0.885 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The batch-transfer comparison leads to a nuanced result. The final supervised AE slightly improves macro-F1 on the harder batch1$\rightarrow$batch2 direction (0.750 versus 0.746 for PCA + LR), but PCA + LR remains stronger on batch2$\rightarrow$batch1 and therefore stays the best overall simple model by mean macro-F1 across the two primary transfer directions. In other words, the AE is competitive and informative, but it does not replace the strongest PCA baseline as the main predictive model.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{figures/ms4_shift_benchmark_by_direction.png}
+\caption{Primary MS4 shift benchmark by transfer direction. PCA + LR remains the strongest overall baseline, while the final supervised AE stays competitive on the harder batch1$\rightarrow$batch2 direction.}
+\label{fig:ms4-shift-benchmark}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.88\linewidth]{figures/batch_effect_metrics.png}
-\caption{Batch-effect metrics before and after Harmony. Batch and condition structure decrease after correction, while cell-type neighborhood preservation remains nearly unchanged.}
-\label{fig:batch-effect-metrics}
+\includegraphics[width=0.94\linewidth]{figures/ms4_best_supdae_training_curves.png}
+\caption{Training curves for the final supervised AE under the MS4 shift benchmark. The curves are reported for the selected \texttt{SupDAE-32-head-w1-noise0.05} model.}
+\label{fig:ms4-training-curves}
 \end{figure}
 
-\subsection{Preprocessing and data split}
+\subsection{Condition-shift follow-up and uncertainty}
 
-The preprocessing pipeline used one fixed path for all later models. We loaded the raw GEO matrices, attached barcode-level metadata, filtered low-quality cells and low-support genes, kept metadata singlets, removed additional doublet-like outliers using Scrublet and high-count/high-gene tail filtering, restricted the two batches to shared genes, normalized counts per batch, applied a log transform, and created a common highly-variable-gene representation. This produced the final shared AnnData object used by both the PCA baselines and the autoencoder summaries.
+Inside batch 2, we also tested a secondary control$\rightarrow$stimulated and stimulated$\rightarrow$control transfer. This follow-up is asymmetric: PCA + LR is stronger on control$\rightarrow$stimulated, while the final supervised AE is stronger on stimulated$\rightarrow$control. We treat this as a useful stress test, but not as the main model-selection criterion.
 
-For the main model comparison, we used a fixed stratified 70/15/15 train/validation/test split with random seed 1090. This produced 24,649 training cells, 5,282 validation cells, and 5,283 test cells. The same split was used for the PCA baseline models and all denoising-autoencoder result files, which makes the model comparison fair.
-
-However, this fixed split is not itself a true distribution-shift evaluation because batches and conditions are mixed across train, validation, and test cells. To address that limitation, we added explicit shift-aware stress tests using PCA fit only on the training source cells and logistic regression evaluated on held-out target groups. In these tests, batch transfer was harder than the same-split comparison: macro-F1 was 0.734 for batch1$\rightarrow$batch2 and 0.793 for batch2$\rightarrow$batch1. Condition transfer inside batch 2 showed a similar asymmetry, with macro-F1 of 0.757 for control$\rightarrow$stimulated and 0.814 for stimulated$\rightarrow$control. We therefore report same-split results as controlled model comparisons, and use the holdout tests to describe robustness under batch or condition shift.
+The main MS4 addition beyond MS3 is uncertainty estimation on the final supervised AE using Monte Carlo dropout with 30 samples. The resulting uncertainty metrics are meaningful in both primary transfer directions. For batch1$\rightarrow$batch2, the final AE reaches a Brier score of 0.149, ECE of 0.009, and confidence-based AUROC of 0.872 for distinguishing correct from incorrect predictions. For batch2$\rightarrow$batch1, the same model reaches a Brier score of 0.117, ECE of 0.024, and confidence-based AUROC of 0.820. These values indicate that prediction confidence is informative even though the final AE is not the best overall classifier.
 
 \begin{table}[t]
 \centering
-\caption{Shift-aware PCA + logistic-regression stress tests. PCA was fit only on source training cells before evaluation on the held-out target group.}
-\label{tab:shift-stress-tests}
+\caption{MC-dropout uncertainty summary for the final supervised AE.}
+\label{tab:uncertainty-summary}
 \begin{tabular}{lrrrr}
 \toprule
-Holdout task & Test cells & Accuracy & Balanced acc. & Macro-F1 \\
+Direction & Accuracy & Brier & ECE & Conf.-AUROC \\
 \midrule
-Batch1$\rightarrow$Batch2 & 23,906 & 0.845 & 0.800 & 0.734 \\
-Batch2$\rightarrow$Batch1 & 11,308 & 0.899 & 0.897 & 0.793 \\
-Control$\rightarrow$Stimulated & 11,809 & 0.844 & 0.807 & 0.757 \\
-Stimulated$\rightarrow$Control & 12,097 & 0.903 & 0.875 & 0.814 \\
+Batch1$\rightarrow$Batch2 & 0.899 & 0.149 & 0.009 & 0.872 \\
+Batch2$\rightarrow$Batch1 & 0.929 & 0.117 & 0.024 & 0.820 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{figures/ms4_uncertainty_summary.png}
+\caption{Final-model uncertainty summary for \texttt{SupDAE-32-head-w1-noise0.05}. Correct predictions are associated with higher confidence and lower entropy than errors in both transfer directions.}
+\label{fig:ms4-uncertainty}
+\end{figure}
+
+Overall, MS4 does not eliminate the underlying data imbalance problem. Instead, it makes that limitation explicit, keeps the baseline comparison honest under dataset shift, and adds a final AE-based uncertainty analysis that is informative even when the best simple PCA baseline remains strongest overall.
